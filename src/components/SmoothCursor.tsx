@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
+type CursorVariant = "default" | "button" | "expand" | "view";
+
 export function SmoothCursor() {
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
   const springX = useSpring(x, { stiffness: 400, damping: 35, mass: 0.4 });
   const springY = useSpring(y, { stiffness: 400, damping: 35, mass: 0.4 });
-  const [hover, setHover] = useState(false);
+  const [variant, setVariant] = useState<CursorVariant>("default");
   const [visible, setVisible] = useState(false);
   const hideTouch = useRef(false);
 
@@ -20,7 +22,10 @@ export function SmoothCursor() {
       y.set(e.clientY);
       setVisible(true);
       const el = e.target as HTMLElement | null;
-      setHover(!!el?.closest("a, button, [role='button'], input, textarea, label, summary"));
+      if (el?.closest("[data-cursor='view']")) setVariant("view");
+      else if (el?.closest("[data-cursor='expand']")) setVariant("expand");
+      else if (el?.closest("a, button, [role='button'], input, textarea, label, summary")) setVariant("button");
+      else setVariant("default");
     };
     const leave = () => setVisible(false);
     window.addEventListener("mousemove", move);
@@ -35,30 +40,27 @@ export function SmoothCursor() {
 
   if (hideTouch.current) return null;
 
+  const sizeRem =
+    variant === "expand" || variant === "view" ? 5 : variant === "button" ? 1.5 : 1;
+  const label = variant === "expand" ? "Expand" : variant === "view" ? "View" : "";
+
   return (
-    <>
+    <motion.div
+      aria-hidden
+      style={{ x: springX, y: springY }}
+      className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+    >
       <motion.div
-        aria-hidden
-        style={{ x: springX, y: springY }}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2"
+        animate={{
+          width: `${sizeRem}rem`,
+          height: `${sizeRem}rem`,
+          opacity: visible ? 1 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.5 }}
+        className="flex items-center justify-center rounded-full bg-white text-black text-xs font-medium"
       >
-        <motion.div
-          animate={{ scale: hover ? 1.8 : 1, opacity: visible ? 1 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="size-8 rounded-full border border-foreground/70 backdrop-blur-[2px]"
-        />
+        {label}
       </motion.div>
-      <motion.div
-        aria-hidden
-        style={{ x, y }}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2"
-      >
-        <motion.div
-          animate={{ scale: hover ? 0 : 1, opacity: visible ? 1 : 0 }}
-          transition={{ type: "spring", stiffness: 500, damping: 25 }}
-          className="size-1.5 rounded-full bg-foreground"
-        />
-      </motion.div>
-    </>
+    </motion.div>
   );
 }
