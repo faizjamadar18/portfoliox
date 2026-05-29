@@ -41,14 +41,14 @@ export function SmoothCursor() {
   if (hideTouch.current) return null;
 
   const sizeRem =
-    variant === "expand" || variant === "view" ? 5 : variant === "button" ? 1.5 : 1;
+    variant === "expand" || variant === "view" ? 3.75 : variant === "button" ? 1.75 : 1;
   const label = variant === "expand" ? "Expand" : variant === "view" ? "View" : "";
 
   return (
     <motion.div
       aria-hidden
       style={{ x: springX, y: springY }}
-      className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] -translate-x-1/2 -translate-y-1/2"
     >
       <motion.div
         animate={{
@@ -57,7 +57,7 @@ export function SmoothCursor() {
           opacity: visible ? 1 : 0,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.5 }}
-        className="flex items-center justify-center rounded-full bg-white text-black text-xs font-medium"
+        className="flex items-center justify-center rounded-full bg-white/90 text-black text-xs font-medium backdrop-blur-sm"
       >
         {label}
       </motion.div>
