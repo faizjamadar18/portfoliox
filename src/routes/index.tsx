@@ -152,7 +152,7 @@ function Index() {
 
         {/* Experience */}
         <Section title="Experience">
-          <ul className="divide-y divide-border rounded-xl border border-border bg-card/40 overflow-hidden">
+          <ul data-cursor="expand" className="divide-y divide-border rounded-xl border border-border bg-card/40 overflow-hidden">
             {experience.map((e, i) => (
               <motion.li
                 key={e.company}
@@ -180,7 +180,7 @@ function Index() {
 
         {/* Projects */}
         <Section title="Projects">
-          <div className="space-y-3">
+          <div data-cursor="view" className="space-y-3">
             {projects.map((p, i) => (
               <motion.a
                 key={p.name}
