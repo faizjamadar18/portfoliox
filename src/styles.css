@@ -2,9 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@media (pointer: fine) {
-  html, body, *, *::before, *::after { cursor: none !important; }
-}
+html, body, *, *::before, *::after { cursor: none !important; }
 
 @custom-variant dark (&:is(.dark *));
 

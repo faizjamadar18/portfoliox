@@ -57,7 +57,7 @@ export function SmoothCursor() {
           opacity: visible ? 1 : 0,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25, mass: 0.5 }}
-        className="flex items-center justify-center rounded-full bg-white/90 text-black text-xs font-medium backdrop-blur-sm"
+        className="flex items-center justify-center rounded-full bg-white text-black text-xs font-medium"
       >
         {label}
       </motion.div>
