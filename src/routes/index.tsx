@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
-import { Github, FileText, ChevronRight, AudioLines } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { Github, FileText, ChevronRight, AudioLines, ExternalLink, X } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import zenshot from "@/assets/zenshot.jpg";
 import tryscribe from "@/assets/tryscribe.jpg";
@@ -27,10 +28,50 @@ const experience = [
 ];
 
 const projects = [
-  { name: "ZenShot", desc: "A modern editor for builders to create viral visuals and share progress.", img: zenshot },
-  { name: "TryScribe", desc: "A modern AI workspace with tools designed to save time and reduce effort.", img: tryscribe },
-  { name: "Synote", desc: "An AI note-taking app that generates notes and summaries using Gemini.", img: synote },
-  { name: "Serein", desc: "An editorial style habit tracking landing page focused on calm design.", img: serein },
+  {
+    id: "zenshot",
+    name: "ZenShot",
+    desc: "A modern editor for builders to create viral visuals and share progress.",
+    img: zenshot,
+    longDesc:
+      "A screenshot editor for founders to visualize progress, MRR and milestones using glass themes, remix layouts, and high res exports. Dockerized app & setup CI/CD workflow.",
+    tags: ["Nextjs", "Supabase", "Docker", "CI/CD", "Cloudflare"],
+    github: "https://github.com/Shreyas-29",
+    live: "https://zenshot.app/",
+  },
+  {
+    id: "tryscribe",
+    name: "TryScribe",
+    desc: "A modern AI workspace with tools designed to save time and reduce effort.",
+    img: tryscribe,
+    longDesc:
+      "A modern AI workspace bundling writing, summarization, and research tools designed for productivity. Built with a polished UI and shipped to 130+ active users.",
+    tags: ["Nextjs", "TypeScript", "OpenAI", "Stripe", "Vercel"],
+    github: "https://github.com/Shreyas-29",
+    live: "https://tryscribe.in/",
+  },
+  {
+    id: "synote",
+    name: "Synote",
+    desc: "An AI note-taking app that generates notes and summaries using Gemini.",
+    img: synote,
+    longDesc:
+      "An AI note-taking app that auto-generates structured notes and concise summaries using Gemini, with a clean writing surface and quick capture flow.",
+    tags: ["Nextjs", "Gemini", "Prisma", "PostgreSQL"],
+    github: "https://github.com/Shreyas-29",
+    live: "#",
+  },
+  {
+    id: "serein",
+    name: "Serein",
+    desc: "An editorial style habit tracking landing page focused on calm design.",
+    img: serein,
+    longDesc:
+      "An editorial style habit tracking landing page focused on calm design, refined typography, and a quiet visual rhythm that invites daily use.",
+    tags: ["Nextjs", "Tailwind", "Motion"],
+    github: "https://github.com/Shreyas-29",
+    live: "#",
+  },
 ];
 
 const techStack = [
@@ -182,27 +223,7 @@ function Index() {
         <Section title="Projects">
           <div data-cursor="view" className="space-y-3">
             {projects.map((p, i) => (
-              <motion.a
-                key={p.name}
-                href="#"
-                variants={fadeUp}
-                custom={i}
-                whileHover={{ y: -2 }}
-                className="flex items-center gap-4 rounded-xl border border-border bg-card/40 p-3 hover:bg-accent/40 transition-colors"
-              >
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  loading="lazy"
-                  width={120}
-                  height={80}
-                  className="h-20 w-32 shrink-0 rounded-lg object-cover"
-                />
-                <div className="min-w-0">
-                  <h3 className="text-base font-semibold text-foreground">{p.name}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{p.desc}</p>
-                </div>
-              </motion.a>
+              <ProjectCard key={p.id} project={p} index={i} />
             ))}
           </div>
           <div className="mt-5">
@@ -255,6 +276,162 @@ function Index() {
           © {new Date().getFullYear()} Shreyas Sihasane
         </footer>
       </div>
+      <ProjectModalRoot />
     </main>
+  );
+}
+
+type Project = (typeof projects)[number];
+
+let openProjectFn: ((p: Project) => void) | null = null;
+let closeProjectFn: (() => void) | null = null;
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.button
+      type="button"
+      variants={fadeUp}
+      custom={index}
+      whileHover={{ y: -2 }}
+      onClick={() => openProjectFn?.(project)}
+      layoutId={`project-card-${project.id}`}
+      className="flex w-full items-center gap-4 rounded-xl border border-border bg-card/40 p-3 text-left hover:bg-accent/40 transition-colors"
+    >
+      <motion.img
+        layoutId={`project-image-${project.id}`}
+        src={project.img}
+        alt={project.name}
+        loading="lazy"
+        className="h-20 w-32 shrink-0 rounded-lg object-cover"
+      />
+      <div className="min-w-0">
+        <motion.h3
+          layoutId={`project-title-${project.id}`}
+          className="text-base font-semibold text-foreground"
+        >
+          {project.name}
+        </motion.h3>
+        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{project.desc}</p>
+      </div>
+    </motion.button>
+  );
+}
+
+function ProjectModalRoot() {
+  const [active, setActive] = useState<Project | null>(null);
+
+  useEffect(() => {
+    openProjectFn = (p) => setActive(p);
+    closeProjectFn = () => setActive(null);
+    return () => {
+      openProjectFn = null;
+      closeProjectFn = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
+
+  return (
+    <AnimatePresence>
+      {active && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setActive(null)}
+            className="absolute inset-0 bg-black/70 backdrop-blur-md"
+          />
+          <motion.div
+            layoutId={`project-card-${active.id}`}
+            className="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+            transition={{ type: "spring", stiffness: 260, damping: 30 }}
+          >
+            <motion.img
+              layoutId={`project-image-${active.id}`}
+              src={active.img}
+              alt={active.name}
+              className="h-72 w-full object-cover"
+            />
+            <button
+              onClick={() => setActive(null)}
+              aria-label="Close"
+              className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-border bg-background/70 text-foreground backdrop-blur hover:bg-background"
+            >
+              <X className="size-4" />
+            </button>
+            <div className="p-6">
+              <div className="flex items-start justify-between gap-4">
+                <motion.h3
+                  layoutId={`project-title-${active.id}`}
+                  className="text-2xl font-semibold text-foreground"
+                >
+                  {active.name}
+                </motion.h3>
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                  className="flex gap-2"
+                >
+                  <a
+                    href={active.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                  >
+                    <Github className="size-4" />
+                  </a>
+                  <a
+                    href={active.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                  >
+                    <ExternalLink className="size-4" />
+                  </a>
+                </motion.div>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="mt-4 flex flex-wrap gap-2"
+              >
+                {active.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs text-foreground"
+                  >
+                    <span className="size-1.5 rounded-full bg-muted-foreground/60" />
+                    {t}
+                  </span>
+                ))}
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18 }}
+                className="mt-5 text-sm leading-relaxed text-muted-foreground"
+              >
+                {active.longDesc}
+              </motion.p>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
