@@ -142,5 +142,6 @@ html, body, *, *::before, *::after { cursor: none !important; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: 'Quicksand', sans-serif;
   }
 }

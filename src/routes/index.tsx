@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
+import { useEffect, useState, useCallback } from "react";
 import { Github, FileText, ChevronRight, AudioLines, ExternalLink, X } from "lucide-react";
 import { Mail } from "lucide-react";
 import {
@@ -123,6 +123,38 @@ const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "Email", href: "mailto:hello@heyshreyas.com", Icon: Mail as unknown as IconType },
 ];
 
+const roles = ["Product Engineer", "Full Stack Developer", "UI Engineer", "Open Source Builder"];
+
+function TextFlipper() {
+  const [index, setIndex] = useState(0);
+
+  const advance = useCallback(() => {
+    setIndex((prev) => (prev + 1) % roles.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(advance, 3000);
+    return () => clearInterval(id);
+  }, [advance]);
+
+  return (
+    <span className="relative inline-flex h-[1.4em] overflow-hidden" style={{ minWidth: 140 }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={roles[index]}
+          initial={{ x: -30, opacity: 0, filter: "blur(8px)" }}
+          animate={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+          exit={{ x: 30, opacity: 0, filter: "blur(8px)" }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute left-0 top-0 whitespace-nowrap text-muted-foreground"
+        >
+          {roles[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
 function Section({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) {
   return (
     <motion.section
@@ -152,14 +184,15 @@ function Index() {
         >
           <img
             src={avatar}
-            alt="Shreyas Sihasane"
+            alt="Faiz Jamadar"
             width={72}
             height={72}
             className="size-[72px] rounded-2xl border border-border object-cover bg-muted"
           />
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Shreyas Sihasane</h1>
-            <p className="text-muted-foreground text-sm mt-0.5">Product Engineer</p>
+            <h1 className="text-2xl font-semibold tracking-tight">Faiz Jamadar</h1>
+            <p className="text-sm mt-0.5"><TextFlipper /></p>
+
           </div>
         </motion.div>
 
@@ -226,7 +259,7 @@ function Index() {
         </motion.div>
 
         {/* Experience */}
-        <Section title="Experience">
+        {/* <Section title="Experience">
           <ul data-cursor="expand" className="divide-y divide-border rounded-xl border border-border bg-card/40 overflow-hidden">
             {experience.map((e, i) => (
               <motion.li
@@ -251,15 +284,17 @@ function Index() {
               </motion.li>
             ))}
           </ul>
-        </Section>
+        </Section> */}
 
         {/* Projects */}
         <Section title="Projects">
-          <div data-cursor="view" className="space-y-3">
-            {projects.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i} />
-            ))}
-          </div>
+          <LayoutGroup>
+            <div data-cursor="view" className="space-y-3">
+              {projects.map((p, i) => (
+                <ProjectCard key={p.id} project={p} index={i} />
+              ))}
+            </div>
+          </LayoutGroup>
           <div className="mt-5">
             <a
               href="#"
@@ -316,7 +351,7 @@ function Index() {
         </Section>
 
         <footer className="mt-20 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Shreyas Sihasane
+          © {new Date().getFullYear()} Faiz Jamdar
         </footer>
       </div>
       <ProjectModalRoot />
@@ -327,155 +362,185 @@ function Index() {
 type Project = (typeof projects)[number];
 
 let openProjectFn: ((p: Project) => void) | null = null;
-let closeProjectFn: (() => void) | null = null;
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
-  return (
-    <motion.button
-      type="button"
-      variants={fadeUp}
-      custom={index}
-      whileHover={{ y: -2 }}
-      onClick={() => openProjectFn?.(project)}
-      className="flex w-full items-center gap-4 rounded-xl border border-border bg-card/40 p-3 text-left hover:bg-accent/40 transition-colors"
-    >
-      <motion.img
-        layoutId={`project-image-${project.id}`}
-        src={project.img}
-        alt={project.name}
-        loading="lazy"
-        className="h-20 w-32 shrink-0 rounded-lg object-cover"
-      />
-      <div className="min-w-0">
-        <h3 className="text-base font-semibold text-foreground">
-          {project.name}
-        </h3>
-        <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{project.desc}</p>
-      </div>
-    </motion.button>
-  );
-}
-
-function ProjectModalRoot() {
-  const [active, setActive] = useState<Project | null>(null);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    openProjectFn = (p) => setActive(p);
-    closeProjectFn = () => setActive(null);
+    // Register this card so the shared opener can target it
+    const prev = openProjectFn;
+    openProjectFn = (p) => {
+      if (p.id === project.id) setIsActive(true);
+      else prev?.(p);
+    };
     return () => {
-      openProjectFn = null;
-      closeProjectFn = null;
+      openProjectFn = prev;
     };
-  }, []);
+  }, [project.id]);
 
+  // Lock scroll & listen for Escape when expanded
   useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(null);
-    };
+    if (!isActive) return;
     document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsActive(false);
+    };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [active]);
+  }, [isActive]);
+
+  const springTransition = { type: "spring" as const, stiffness: 200, damping: 28 };
 
   return (
-    <AnimatePresence>
-      {active && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={() => setActive(null)}
-            className="absolute inset-0 bg-black/70 backdrop-blur-md"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
-          >
-            <motion.img
-              layoutId={`project-image-${active.id}`}
-              src={active.img}
-              alt={active.name}
-              className="h-72 w-full object-cover"
-              transition={{ type: "spring", stiffness: 220, damping: 28 }}
+    <>
+      {/* Collapsed card */}
+      <motion.button
+        type="button"
+        variants={fadeUp}
+        custom={index}
+        layoutId={`project-card-${project.id}`}
+        onClick={() => setIsActive(true)}
+        style={{ borderRadius: 12 }}
+        className="flex w-full items-center gap-4 border border-border bg-card/40 p-3 text-left hover:bg-accent/40 transition-colors"
+      >
+        <motion.img
+          layoutId={`project-image-${project.id}`}
+          src={project.img}
+          alt={project.name}
+          loading="lazy"
+          style={{ borderRadius: 8 }}
+          className="h-20 w-32 shrink-0 object-cover"
+        />
+        <motion.div className="min-w-0" layoutId={`project-text-${project.id}`}>
+          <motion.h3 layoutId={`project-name-${project.id}`} className="text-base font-semibold text-foreground">
+            {project.name}
+          </motion.h3>
+          <motion.p layoutId={`project-desc-${project.id}`} className="mt-1 text-sm text-muted-foreground line-clamp-2">
+            {project.desc}
+          </motion.p>
+        </motion.div>
+      </motion.button>
+
+      {/* Expanded overlay */}
+      <AnimatePresence>
+        {isActive && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsActive(false)}
+              className="absolute inset-0 bg-black/70 backdrop-blur-md"
             />
-            <button
-              onClick={() => setActive(null)}
-              aria-label="Close"
-              className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-border bg-background/70 text-foreground backdrop-blur hover:bg-background"
+
+            {/* Expanded card — shares layoutId with the collapsed card */}
+            <motion.div
+              layoutId={`project-card-${project.id}`}
+              style={{ borderRadius: 16 }}
+              className="relative z-10 w-full max-w-xl overflow-hidden border border-border bg-card shadow-2xl"
+              transition={springTransition}
             >
-              <X className="size-4" />
-            </button>
-            <div className="p-6">
-              <div className="flex items-start justify-between gap-4">
-                <motion.h3
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.12, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-2xl font-semibold text-foreground"
-                >
-                  {active.name}
-                </motion.h3>
+              {/* Image morphs from small thumbnail to full-width hero */}
+              <motion.img
+                layoutId={`project-image-${project.id}`}
+                src={project.img}
+                alt={project.name}
+                style={{ borderRadius: 0 }}
+                className="h-72 w-full object-cover"
+                transition={springTransition}
+              />
+
+              {/* Close button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: 0.15, duration: 0.2 }}
+                onClick={() => setIsActive(false)}
+                aria-label="Close"
+                className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-border bg-background/70 text-foreground backdrop-blur hover:bg-background"
+              >
+                <X className="size-4" />
+              </motion.button>
+
+              <div className="p-6">
+                {/* Name & links */}
+                <div className="flex items-start justify-between gap-4">
+                  <motion.h3
+                    layoutId={`project-name-${project.id}`}
+                    className="text-2xl font-semibold text-foreground"
+                    transition={springTransition}
+                  >
+                    {project.name}
+                  </motion.h3>
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ delay: 0.15, duration: 0.3 }}
+                    className="flex gap-2"
+                  >
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                    >
+                      <Github className="size-4" />
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                    >
+                      <ExternalLink className="size-4" />
+                    </a>
+                  </motion.div>
+                </div>
+
+                {/* Tags */}
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
-                  className="flex gap-2"
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                  className="mt-4 flex flex-wrap gap-2"
                 >
-                  <a
-                    href={active.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
-                  >
-                    <Github className="size-4" />
-                  </a>
-                  <a
-                    href={active.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
-                  >
-                    <ExternalLink className="size-4" />
-                  </a>
+                  {project.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs text-foreground"
+                    >
+                      <span className="size-1.5 rounded-full bg-muted-foreground/60" />
+                      {t}
+                    </span>
+                  ))}
                 </motion.div>
+
+                {/* Description — slides in below the image */}
+                <motion.p
+                  layoutId={`project-desc-${project.id}`}
+                  className="mt-5 text-sm leading-relaxed text-muted-foreground"
+                  transition={springTransition}
+                >
+                  {project.longDesc}
+                </motion.p>
               </div>
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="mt-4 flex flex-wrap gap-2"
-              >
-                {active.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs text-foreground"
-                  >
-                    <span className="size-1.5 rounded-full bg-muted-foreground/60" />
-                    {t}
-                  </span>
-                ))}
-              </motion.div>
-              <motion.p
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.18 }}
-                className="mt-5 text-sm leading-relaxed text-muted-foreground"
-              >
-                {active.longDesc}
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
+}
+
+function ProjectModalRoot() {
+  // No longer needed — kept as an empty fragment for the JSX reference in Index
+  return null;
 }
