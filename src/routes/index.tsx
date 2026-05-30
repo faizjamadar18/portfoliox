@@ -298,17 +298,17 @@ function Index() {
 
         {/* Get In Touch */}
         <Section title="Get In Touch">
-          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <ul className="flex flex-wrap gap-2">
             {socials.map((s, i) => (
               <motion.li key={s.label} variants={fadeUp} custom={i}>
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-border bg-secondary px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs text-foreground hover:bg-accent transition-colors"
                 >
+                  <s.Icon className="size-3.5" />
                   {s.label}
-                  <ChevronRight className="size-4 text-muted-foreground" />
                 </a>
               </motion.li>
             ))}
