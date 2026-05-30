@@ -8,9 +8,9 @@ import {
   SiReactquery, SiNodedotjs, SiPython, SiFastapi, SiFlask,
   SiPostgresql, SiMongodb, SiSupabase, SiPrisma, SiOpenai,
   SiGooglegemini, SiDocker, SiVercel, SiCloudflare, SiGooglecloud,
-  SiStripe, SiGithub, SiX, SiLinkedin, SiYoutube,
+  SiStripe, SiGithub, SiX, SiYoutube,
 } from "react-icons/si";
-import { FaAws } from "react-icons/fa";
+import { FaAws, FaLinkedin } from "react-icons/fa";
 import type { IconType } from "react-icons";
 import avatar from "@/assets/avatar.png";
 import zenshot from "@/assets/zenshot.jpg";
@@ -117,7 +117,7 @@ const techStack: Tech[] = [
 const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "GitHub", href: "https://github.com/Shreyas-29", Icon: SiGithub },
   { label: "Twitter", href: "https://twitter.com/shreyassihasane", Icon: SiX },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: SiLinkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: FaLinkedin },
   { label: "Youtube", href: "https://heyshreyas.com/yt", Icon: SiYoutube },
   { label: "Notes", href: "https://www.heyshreyas.com/notes", Icon: FileText as unknown as IconType },
   { label: "Email", href: "mailto:hello@heyshreyas.com", Icon: Mail as unknown as IconType },
@@ -275,13 +275,22 @@ function Index() {
           <div className="flex flex-wrap gap-2">
             {techStack.map((t, i) => (
               <motion.span
-                key={t}
+                key={t.name}
                 variants={fadeUp}
                 custom={i * 0.3}
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs text-foreground"
               >
-                <span className="size-1.5 rounded-full bg-muted-foreground/60" />
-                {t}
+                {t.Icon ? (
+                  <t.Icon className="size-3.5" style={{ color: t.color }} />
+                ) : (
+                  <span
+                    className="inline-flex size-3.5 items-center justify-center rounded-sm text-[9px] font-bold text-black"
+                    style={{ background: t.letterBg }}
+                  >
+                    {t.letter}
+                  </span>
+                )}
+                {t.name}
               </motion.span>
             ))}
           </div>
