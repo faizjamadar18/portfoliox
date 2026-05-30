@@ -2,6 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { Github, FileText, ChevronRight, AudioLines, ExternalLink, X } from "lucide-react";
+import { Mail } from "lucide-react";
+import {
+  SiNextdotjs, SiTypescript, SiTailwindcss, SiFramer, SiGreensock,
+  SiReactquery, SiNodedotjs, SiPython, SiFastapi, SiFlask,
+  SiPostgresql, SiMongodb, SiSupabase, SiPrisma, SiOpenai,
+  SiGooglegemini, SiDocker, SiVercel, SiCloudflare, SiGooglecloud,
+  SiStripe, SiGithub, SiX, SiYoutube,
+} from "react-icons/si";
+import { FaAws, FaLinkedin } from "react-icons/fa";
+import type { IconType } from "react-icons";
 import avatar from "@/assets/avatar.png";
 import zenshot from "@/assets/zenshot.jpg";
 import tryscribe from "@/assets/tryscribe.jpg";
@@ -74,19 +84,43 @@ const projects = [
   },
 ];
 
-const techStack = [
-  "Next.js","TypeScript","Tailwind","Motion","GSAP","React Query","Zustand",
-  "Node.js","Python","FastAPI","Flask","PostgreSQL","MongoDB","Supabase",
-  "NeonDB","Prisma","OpenAI","Gemini","Qdrant","Docker","Vercel","Cloudflare",
-  "AWS","GCP","Stripe","Paddle",
+type Tech = { name: string; Icon?: IconType; color?: string; letter?: string; letterBg?: string };
+const techStack: Tech[] = [
+  { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Motion", Icon: SiFramer, color: "#ffffff" },
+  { name: "GSAP", Icon: SiGreensock, color: "#88CE02" },
+  { name: "React Query", Icon: SiReactquery, color: "#FF4154" },
+  { name: "Zustand", letter: "🐻", letterBg: "transparent" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E" },
+  { name: "Python", Icon: SiPython, color: "#3776AB" },
+  { name: "FastAPI", Icon: SiFastapi, color: "#009688" },
+  { name: "Flask", Icon: SiFlask, color: "#ffffff" },
+  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
+  { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
+  { name: "Supabase", Icon: SiSupabase, color: "#3FCF8E" },
+  { name: "NeonDB", letter: "N", letterBg: "#00E599" },
+  { name: "Prisma", Icon: SiPrisma, color: "#ffffff" },
+  { name: "OpenAI", Icon: SiOpenai, color: "#ffffff" },
+  { name: "Gemini", Icon: SiGooglegemini, color: "#8E75B2" },
+  { name: "Qdrant", letter: "Q", letterBg: "#DC382D" },
+  { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+  { name: "Vercel", Icon: SiVercel, color: "#ffffff" },
+  { name: "Cloudflare", Icon: SiCloudflare, color: "#F38020" },
+  { name: "AWS", Icon: FaAws, color: "#FF9900" },
+  { name: "GCP", Icon: SiGooglecloud, color: "#4285F4" },
+  { name: "Stripe", Icon: SiStripe, color: "#635BFF" },
+  { name: "Paddle", letter: "P", letterBg: "#FFD500" },
 ];
 
-const socials = [
-  { label: "GitHub", href: "https://github.com/Shreyas-29" },
-  { label: "Twitter", href: "https://twitter.com/shreyassihasane" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane" },
-  { label: "Youtube", href: "https://heyshreyas.com/yt" },
-  { label: "Notes", href: "https://www.heyshreyas.com/notes" },
+const socials: { label: string; href: string; Icon: IconType }[] = [
+  { label: "GitHub", href: "https://github.com/Shreyas-29", Icon: SiGithub },
+  { label: "Twitter", href: "https://twitter.com/shreyassihasane", Icon: SiX },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: FaLinkedin },
+  { label: "Youtube", href: "https://heyshreyas.com/yt", Icon: SiYoutube },
+  { label: "Notes", href: "https://www.heyshreyas.com/notes", Icon: FileText as unknown as IconType },
+  { label: "Email", href: "mailto:hello@heyshreyas.com", Icon: Mail as unknown as IconType },
 ];
 
 function Section({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) {
@@ -241,13 +275,22 @@ function Index() {
           <div className="flex flex-wrap gap-2">
             {techStack.map((t, i) => (
               <motion.span
-                key={t}
+                key={t.name}
                 variants={fadeUp}
                 custom={i * 0.3}
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs text-foreground"
               >
-                <span className="size-1.5 rounded-full bg-muted-foreground/60" />
-                {t}
+                {t.Icon ? (
+                  <t.Icon className="size-3.5" style={{ color: t.color }} />
+                ) : (
+                  <span
+                    className="inline-flex size-3.5 items-center justify-center rounded-sm text-[9px] font-bold text-black"
+                    style={{ background: t.letterBg }}
+                  >
+                    {t.letter}
+                  </span>
+                )}
+                {t.name}
               </motion.span>
             ))}
           </div>
@@ -255,17 +298,17 @@ function Index() {
 
         {/* Get In Touch */}
         <Section title="Get In Touch">
-          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <ul className="flex flex-wrap gap-2">
             {socials.map((s, i) => (
               <motion.li key={s.label} variants={fadeUp} custom={i}>
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between rounded-lg border border-border bg-secondary px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-1.5 text-xs text-foreground hover:bg-accent transition-colors"
                 >
+                  <s.Icon className="size-3.5" />
                   {s.label}
-                  <ChevronRight className="size-4 text-muted-foreground" />
                 </a>
               </motion.li>
             ))}
