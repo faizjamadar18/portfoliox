@@ -2,6 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { Github, FileText, ChevronRight, AudioLines, ExternalLink, X } from "lucide-react";
+import { Mail } from "lucide-react";
+import {
+  SiNextdotjs, SiTypescript, SiTailwindcss, SiFramer, SiGreensock,
+  SiReactquery, SiNodedotjs, SiPython, SiFastapi, SiFlask,
+  SiPostgresql, SiMongodb, SiSupabase, SiPrisma, SiOpenai,
+  SiGooglegemini, SiDocker, SiVercel, SiCloudflare, SiGooglecloud,
+  SiStripe, SiGithub, SiX, SiLinkedin, SiYoutube,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa";
+import type { IconType } from "react-icons";
 import avatar from "@/assets/avatar.png";
 import zenshot from "@/assets/zenshot.jpg";
 import tryscribe from "@/assets/tryscribe.jpg";
@@ -74,19 +84,43 @@ const projects = [
   },
 ];
 
-const techStack = [
-  "Next.js","TypeScript","Tailwind","Motion","GSAP","React Query","Zustand",
-  "Node.js","Python","FastAPI","Flask","PostgreSQL","MongoDB","Supabase",
-  "NeonDB","Prisma","OpenAI","Gemini","Qdrant","Docker","Vercel","Cloudflare",
-  "AWS","GCP","Stripe","Paddle",
+type Tech = { name: string; Icon?: IconType; color?: string; letter?: string; letterBg?: string };
+const techStack: Tech[] = [
+  { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Motion", Icon: SiFramer, color: "#ffffff" },
+  { name: "GSAP", Icon: SiGreensock, color: "#88CE02" },
+  { name: "React Query", Icon: SiReactquery, color: "#FF4154" },
+  { name: "Zustand", letter: "🐻", letterBg: "transparent" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E" },
+  { name: "Python", Icon: SiPython, color: "#3776AB" },
+  { name: "FastAPI", Icon: SiFastapi, color: "#009688" },
+  { name: "Flask", Icon: SiFlask, color: "#ffffff" },
+  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
+  { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
+  { name: "Supabase", Icon: SiSupabase, color: "#3FCF8E" },
+  { name: "NeonDB", letter: "N", letterBg: "#00E599" },
+  { name: "Prisma", Icon: SiPrisma, color: "#ffffff" },
+  { name: "OpenAI", Icon: SiOpenai, color: "#ffffff" },
+  { name: "Gemini", Icon: SiGooglegemini, color: "#8E75B2" },
+  { name: "Qdrant", letter: "Q", letterBg: "#DC382D" },
+  { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+  { name: "Vercel", Icon: SiVercel, color: "#ffffff" },
+  { name: "Cloudflare", Icon: SiCloudflare, color: "#F38020" },
+  { name: "AWS", Icon: FaAws, color: "#FF9900" },
+  { name: "GCP", Icon: SiGooglecloud, color: "#4285F4" },
+  { name: "Stripe", Icon: SiStripe, color: "#635BFF" },
+  { name: "Paddle", letter: "P", letterBg: "#FFD500" },
 ];
 
-const socials = [
-  { label: "GitHub", href: "https://github.com/Shreyas-29" },
-  { label: "Twitter", href: "https://twitter.com/shreyassihasane" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane" },
-  { label: "Youtube", href: "https://heyshreyas.com/yt" },
-  { label: "Notes", href: "https://www.heyshreyas.com/notes" },
+const socials: { label: string; href: string; Icon: IconType }[] = [
+  { label: "GitHub", href: "https://github.com/Shreyas-29", Icon: SiGithub },
+  { label: "Twitter", href: "https://twitter.com/shreyassihasane", Icon: SiX },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: SiLinkedin },
+  { label: "Youtube", href: "https://heyshreyas.com/yt", Icon: SiYoutube },
+  { label: "Notes", href: "https://www.heyshreyas.com/notes", Icon: FileText as unknown as IconType },
+  { label: "Email", href: "mailto:hello@heyshreyas.com", Icon: Mail as unknown as IconType },
 ];
 
 function Section({ title, children, delay = 0 }: { title: string; children: React.ReactNode; delay?: number }) {
