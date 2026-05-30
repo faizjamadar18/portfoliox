@@ -294,7 +294,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       custom={index}
       whileHover={{ y: -2 }}
       onClick={() => openProjectFn?.(project)}
-      layoutId={`project-card-${project.id}`}
       className="flex w-full items-center gap-4 rounded-xl border border-border bg-card/40 p-3 text-left hover:bg-accent/40 transition-colors"
     >
       <motion.img
@@ -305,12 +304,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         className="h-20 w-32 shrink-0 rounded-lg object-cover"
       />
       <div className="min-w-0">
-        <motion.h3
-          layoutId={`project-title-${project.id}`}
-          className="text-base font-semibold text-foreground"
-        >
+        <h3 className="text-base font-semibold text-foreground">
           {project.name}
-        </motion.h3>
+        </h3>
         <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{project.desc}</p>
       </div>
     </motion.button>
@@ -355,15 +351,18 @@ function ProjectModalRoot() {
             className="absolute inset-0 bg-black/70 backdrop-blur-md"
           />
           <motion.div
-            layoutId={`project-card-${active.id}`}
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 8 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
-            transition={{ type: "spring", stiffness: 260, damping: 30 }}
           >
             <motion.img
               layoutId={`project-image-${active.id}`}
               src={active.img}
               alt={active.name}
               className="h-72 w-full object-cover"
+              transition={{ type: "spring", stiffness: 220, damping: 28 }}
             />
             <button
               onClick={() => setActive(null)}
@@ -375,7 +374,9 @@ function ProjectModalRoot() {
             <div className="p-6">
               <div className="flex items-start justify-between gap-4">
                 <motion.h3
-                  layoutId={`project-title-${active.id}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.12, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="text-2xl font-semibold text-foreground"
                 >
                   {active.name}
