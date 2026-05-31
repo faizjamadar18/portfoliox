@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 
-export function PlayingAnimation({ className }: { className?: string }) {
+export function PlayingAnimation({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <div className={`flex items-end justify-between w-4 h-4 pt-[2px] pb-[2px] ${className}`}>
+    <div className={`flex items-end justify-between w-4 h-4 pt-[2px] pb-[2px] ${className ?? ""}`} style={style}>
       <motion.span
         className="w-[3px] bg-current rounded-[1px]"
         animate={{ height: ["40%", "100%", "60%", "80%", "40%"] }}
