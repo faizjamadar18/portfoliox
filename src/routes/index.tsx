@@ -83,13 +83,13 @@ function Index() {
         >
           <a
             href="https://github.com/Shreyas-29"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors"
           >
             <Github className="size-4" /> GitHub
           </a>
           <a
             href="/resume.pdf"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium hover:bg-accent transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors"
           >
             <FileText className="size-4" /> Resume
           </a>
@@ -122,7 +122,7 @@ function Index() {
                 key={t.name}
                 variants={fadeUp}
                 custom={i * 0.1}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-white/[0.08] transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
               >
                 {t.Icon ? (
                   <t.Icon className="size-4" style={{ color: t.color }} />
@@ -149,7 +149,7 @@ function Index() {
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-white/[0.08] transition-colors"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
                 >
                   <s.Icon className="size-4" />
                   {s.label}
