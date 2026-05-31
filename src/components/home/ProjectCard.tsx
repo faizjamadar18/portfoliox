@@ -47,7 +47,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         layoutId={`project-card-${project.id}`}
         onClick={() => setIsActive(true)}
         style={{ borderRadius: 12 }}
-        className="flex w-full items-center gap-4 border border-border bg-card/40 p-3 text-left hover:bg-accent/40 transition-colors"
+        className="flex w-full items-center gap-4 p-3 text-left hover:bg-accent/40 transition-colors"
       >
         <motion.img
           layoutId={`project-image-${project.id}`}
@@ -85,7 +85,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             <motion.div
               layoutId={`project-card-${project.id}`}
               style={{ borderRadius: 16 }}
-              className="relative z-10 w-full max-w-xl overflow-hidden border border-border bg-card shadow-2xl"
+              className="relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl"
               transition={springTransition}
             >
               {/* Image morphs from small thumbnail to full-width hero */}
@@ -94,12 +94,12 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 src={project.img}
                 alt={project.name}
                 style={{ borderRadius: 0 }}
-                className="h-72 w-full object-cover"
+                className="h-62 w-full object-cover"
                 transition={springTransition}
               />
 
               {/* Close button */}
-              <motion.button
+              {/* <motion.button
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -109,7 +109,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-border bg-background/70 text-foreground backdrop-blur hover:bg-background"
               >
                 <X className="size-4" />
-              </motion.button>
+              </motion.button> */}
 
               <div className="p-6">
                 {/* Name & links */}
