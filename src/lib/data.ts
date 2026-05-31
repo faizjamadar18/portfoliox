@@ -113,18 +113,18 @@ export const roles = ["Product Engineer", "Full Stack Developer", "UI Engineer",
 
 export const songs = [
   {
-    title: "Die With A Smile",
-    artist: "Lady Gaga, Bruno Mars",
-    url: "https://open.spotify.com/track/27WebcZ0fwAcdBxcx98b89",
-    cover: "https://i.scdn.co/image/ab67616d00001e0282b0431cb0dd1bc3b3d162bc",
-    color: "#4b90e2", // Blueish from the cover
-  },
-  {
     title: "Starboy",
     artist: "The Weeknd ft. Daft Punk",
     url: "https://open.spotify.com/track/7MXVkk9YMqq6vqLSZcgveL",
     cover: "https://i.scdn.co/image/ab67616d00001e024718e2b124f79258be7bc452",
     color: "#ff5b5b", // Red
+  },
+  {
+    title: "Die With A Smile",
+    artist: "Lady Gaga, Bruno Mars",
+    url: "https://open.spotify.com/track/27WebcZ0fwAcdBxcx98b89",
+    cover: "https://i.scdn.co/image/ab67616d0000b27382ea2e9e1858aa012c57cd45",
+    color: "#4b90e2", // Blueish from the cover
   },
   {
     title: "Espresso",
@@ -138,6 +138,6 @@ export const songs = [
     artist: "The Weeknd",
     url: "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b",
     cover: "https://i.scdn.co/image/ab67616d00001e028863bc11d2aa12b54f5aeb36",
-    color: "#ffcc00", // Yellowish
+    color: "#4b694fff", // Yellowish
   },
 ];

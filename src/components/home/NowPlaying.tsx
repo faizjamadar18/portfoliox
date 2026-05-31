@@ -33,7 +33,7 @@ export function NowPlaying() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 flex items-center gap-2 whitespace-nowrap"
+            className="absolute inset-0 flex gap-3 whitespace-nowrap"
           >
             <img src={song.cover} alt={song.title} className="size-5 rounded object-cover shadow-sm" />
             <span>
