@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, LayoutGroup } from "motion/react";
-import { Github, FileText, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { HiDocumentText } from "react-icons/hi2";
 import avatar from "@/assets/avatar.png";
 
 import { projects, techStack, socials } from "@/lib/data";
@@ -85,13 +87,13 @@ function Index() {
             href="https://github.com/Shreyas-29"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
           >
-            <Github className="size-4" /> GitHub
+            <SiGithub className="size-4" /> GitHub
           </a>
           <a
             href="/resume.pdf"
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
           >
-            <FileText className="size-4" /> Resume
+            <HiDocumentText className="size-4" /> Resume
           </a>
         </motion.div>
 
