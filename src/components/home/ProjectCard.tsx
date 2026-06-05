@@ -58,9 +58,9 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           className="h-20 w-32 shrink-0 object-cover"
         />
         <motion.div className="min-w-0" layoutId={`project-text-${project.id}`}>
-          <motion.h3 layoutId={`project-name-${project.id}`} className="text-base font-semibold text-foreground">
+          <h3 className="text-base font-semibold text-foreground">
             {project.name}
-          </motion.h3>
+          </h3>
           <motion.p layoutId={`project-desc-${project.id}`} className="mt-1 text-sm text-muted-foreground line-clamp-2">
             {project.desc}
           </motion.p>
