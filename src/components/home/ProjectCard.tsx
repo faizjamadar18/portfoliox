@@ -115,9 +115,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 {/* Name & links */}
                 <div className="flex items-start justify-between gap-4">
                   <motion.h3
-                    layoutId={`project-name-${project.id}`}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ delay: 0.1, duration: 0.25 }}
                     className="text-2xl font-semibold text-foreground"
-                    transition={springTransition}
                   >
                     {project.name}
                   </motion.h3>
