@@ -100,11 +100,15 @@ function Index() {
         {/* Projects */}
         <Section title="Projects">
           <LayoutGroup>
-            <div data-cursor="view" className="space-y-3">
-              {projects.map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i} />
+            <motion.div
+              variants={staggerContainer(0.08)}
+              data-cursor="view"
+              className="space-y-3"
+            >
+              {projects.map((p) => (
+                <ProjectCard key={p.id} project={p} />
               ))}
-            </div>
+            </motion.div>
           </LayoutGroup>
           <div className="mt-5">
             <a
