@@ -6,7 +6,7 @@ import { HiDocumentText } from "react-icons/hi2";
 import avatar from "@/assets/avatar.png";
 
 import { projects, techStack, socials } from "@/lib/data";
-import { fadeUp, blurReveal } from "@/lib/animations";
+import { fadeUp, blurReveal, staggerContainer } from "@/lib/animations";
 
 import { TextFlipper } from "@/components/home/TextFlipper";
 import { Section } from "@/components/home/Section";
