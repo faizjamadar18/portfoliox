@@ -43,26 +43,29 @@ function Index() {
 
         {/* Bio */}
         <motion.div
-          className="mt-8 space-y-4 text-[15px] leading-relaxed text-muted-foreground"
+          className="mt-8 space-y-5 text-[15px] leading-relaxed text-muted-foreground"
           initial="hidden"
           animate="visible"
           variants={fadeUp}
           custom={1}
         >
-          <p>
-            I'm a <span className="text-foreground font-medium">full-stack engineer</span> who builds products from{" "}
-            <span className="text-foreground font-medium">concept to launch</span>. I focus on clean code, smooth interfaces, and{" "}
-            <span className="text-foreground font-medium">shipping features</span> that actually matter to users.
-          </p>
-          <p>
-            I shipped <a href="https://tryscribe.in/" className="text-foreground font-medium underline-offset-4 hover:underline">TryScribe</a>, a productivity tool with{" "}
-            <span className="text-foreground font-medium">130+ users</span>, and I'm currently building{" "}
-            <a href="https://zenshot.app/" className="text-foreground font-medium underline-offset-4 hover:underline">ZenShot</a>, a screenshot beautification tool for makers sharing their progress.
-          </p>
-          <p>
-            Open to <span className="text-foreground font-medium">full time</span> roles and{" "}
-            <span className="text-foreground font-medium">collaborations</span>.
-          </p>
+        <p >
+          A <span className="text-foreground font-medium">Software Developer & AI Engineer</span> with{" "}
+          <span className="text-foreground font-medium">1.5+ years</span> of hands-on experience building
+          impactful products and solving real-world problems with{" "}
+          <span className="text-foreground font-medium">up-to-date technologies</span>.
+        </p>
+        <p className="text-base">
+          Skilled in production-ready{" "}
+          <span className="text-foreground font-medium">Full-Stack Development</span>,{" "}
+          <span className="text-foreground font-medium">AI Automations</span>, intelligent{" "}
+          <span className="text-foreground font-medium">predictive modeling</span>, and data-driven{" "}
+          <span className="text-foreground font-medium">AI/ML solutions</span> — built to scale and ship.
+        </p>
+        <p >
+          Open to <span className="text-foreground font-medium">full-time roles</span> and{" "}
+          <span className="text-foreground font-medium">collaborations</span>.
+        </p>
         </motion.div>
 
         {/* Now playing */}

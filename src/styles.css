@@ -76,7 +76,7 @@ html, body, *, *::before, *::after { cursor: none !important; }
   --secondary: oklch(0.16 0 0);
   --secondary-foreground: oklch(0.96 0 0);
   --muted: oklch(0.16 0 0);
-  --muted-foreground: oklch(0.6 0 0);
+  --muted-foreground: oklch(66.655% 0.00008 271.152);
   --accent: oklch(0.18 0 0);
   --accent-foreground: oklch(0.96 0 0);
   --destructive: oklch(0.577 0.245 27.325);
