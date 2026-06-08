@@ -3,7 +3,7 @@ import { motion, LayoutGroup } from "motion/react";
 import { ChevronRight } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { HiDocumentText } from "react-icons/hi2";
-import avatar from "@/assets/avatar.png";
+import avatar from "@/assets/avatar.jpg";
 
 import { projects, techStack, socials } from "@/lib/data";
 import { fadeUp, blurReveal, staggerContainer } from "@/lib/animations";

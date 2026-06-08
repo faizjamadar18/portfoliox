@@ -97,18 +97,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                 transition={springTransition}
               />
 
-              {/* Close button */}
-              {/* <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ delay: 0.15, duration: 0.2 }}
-                onClick={() => setIsActive(false)}
-                aria-label="Close"
-                className="absolute right-3 top-3 inline-flex size-9 items-center justify-center rounded-full border border-border bg-background/70 text-foreground backdrop-blur hover:bg-background"
-              >
-                <X className="size-4" />
-              </motion.button> */}
+      
 
               <div className="p-6">
                 {/* Name & links */}
