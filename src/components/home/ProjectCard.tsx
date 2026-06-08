@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Github, ExternalLink, X } from "lucide-react";
 import { Project } from "@/lib/data";
-import { fadeUp } from "@/lib/animations";
+import { blurReveal } from "@/lib/animations";
 
 let openProjectFn: ((p: Project) => void) | null = null;
 
-export function ProjectCard({ project, index }: { project: Project; index: number }) {
+export function ProjectCard({ project }: { project: Project; index?: number }) {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -42,8 +42,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       {/* Collapsed card */}
       <motion.button
         type="button"
-        variants={fadeUp}
-        custom={index}
+        variants={blurReveal}
         layoutId={`project-card-${project.id}`}
         onClick={() => setIsActive(true)}
         style={{ borderRadius: 12 }}
