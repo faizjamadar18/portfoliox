@@ -6,7 +6,7 @@ import { HiDocumentText } from "react-icons/hi2";
 import avatar from "@/assets/avatar.png";
 
 import { projects, techStack, socials } from "@/lib/data";
-import { fadeUp } from "@/lib/animations";
+import { fadeUp, blurReveal } from "@/lib/animations";
 
 import { TextFlipper } from "@/components/home/TextFlipper";
 import { Section } from "@/components/home/Section";
@@ -122,8 +122,7 @@ function Index() {
             {techStack.map((t, i) => (
               <motion.span
                 key={t.name}
-                variants={fadeUp}
-                custom={i * 0.1}
+                variants={blurReveal}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
               >
                 {t.Icon ? (
@@ -146,7 +145,7 @@ function Index() {
         <Section title="Get In Touch">
           <ul className="flex flex-wrap gap-3">
             {socials.map((s, i) => (
-              <motion.li key={s.label} variants={fadeUp} custom={i * 0.1}>
+              <motion.li key={s.label} variants={blurReveal}>
                 <a
                   href={s.href}
                   target="_blank"
