@@ -39,7 +39,8 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
 
   return (
     <>
-      {/* Collapsed card */}
+      {/* Collapsed card — wrapper reserves space so siblings don't shift when expanded */}
+      <div className="relative" style={{ minHeight: 104 }}>
       <motion.button
         type="button"
         variants={blurReveal}
@@ -65,6 +66,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
           </motion.p>
         </motion.div>
       </motion.button>
+      </div>
 
       {/* Expanded overlay */}
       <AnimatePresence>
