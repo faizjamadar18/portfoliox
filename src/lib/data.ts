@@ -5,6 +5,8 @@ import {
   SiPostgresql, SiMongodb, SiSupabase, SiPrisma, SiOpenai,
   SiGooglegemini, SiDocker, SiVercel, SiCloudflare, SiGooglecloud,
   SiStripe, SiGithub, SiX, SiYoutube,
+  SiReact, SiSocketdotio, SiScikitlearn, SiStreamlit, SiClerk, SiLangchain, SiJsonwebtokens, SiWebrtc,
+  SiCplusplus, SiJavascript, SiMysql, SiExpress, SiPytorch, SiNumpy, SiPandas,
 } from "react-icons/si";
 import { FaAws, FaLinkedin } from "react-icons/fa";
 import type { IconType } from "react-icons";
@@ -30,20 +32,9 @@ export const projects = [
     img: attendx,
     longDesc:
       "An AI-powered attendance platform that automates student tracking using computer vision and voice recognition.",
-    tags: ["Python", "Scikit-learn", "Streamlit", "Supabase", "Computer Vision"],
+    tags: ["Python", "Scikit-learn", "Supabase"],
     github: "https://github.com/faizjamadar18/AttendX",
     live: "https://attendx-landing.vercel.app",
-  },
-  {
-    id: "xpense",
-    name: "XpenseFlow",
-    desc: "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
-    img: xpense,
-    longDesc:
-      "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
-    tags: ["Next.js", "Clerk", "Supabase", "Prisma", "Gemini API"],
-    github: "https://github.com/faizjamadar18/Xpense-flow",
-    live: "https://xpenseflow.vercel.app",
   },
   {
     id: "docschat",
@@ -52,10 +43,22 @@ export const projects = [
     img: docschat,
     longDesc:
       "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
-    tags: ["Next.js", "FastAPI", "LangChain", "ChromaDB", "Gemini", "RAG"],
+    tags: ["Next.js", "FastAPI","RAG", "LangChain", "ChromaDB", "Gemini"],
     github: "https://github.com/faizjamadar18/DocsChat",
     live: "https://docschats.vercel.app",
   },
+  {
+    id: "xpense",
+    name: "XpenseFlow",
+    desc: "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
+    img: xpense,
+    longDesc:
+      "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
+    tags: ["Next.js", "Supabase", "Prisma", "Gemini"],
+    github: "https://github.com/faizjamadar18/Xpense-flow",
+    live: "https://xpenseflow.vercel.app",
+  },
+
   {
     id: "faizbook",
     name: "Faizbook",
@@ -87,11 +90,9 @@ export type Tech = { name: string; Icon?: IconType; color?: string; letter?: str
 export const techStack: Tech[] = [
   { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
   { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
+  { name: "React", Icon: SiReact, color: "#61DAFB" },
   { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
   { name: "Motion", Icon: SiFramer, color: "#ffffff" },
-  { name: "GSAP", Icon: SiGreensock, color: "#88CE02" },
-  { name: "React Query", Icon: SiReactquery, color: "#FF4154" },
-  { name: "Zustand", letter: "🐻", letterBg: "transparent" },
   { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E" },
   { name: "Python", Icon: SiPython, color: "#3776AB" },
   { name: "FastAPI", Icon: SiFastapi, color: "#009688" },
@@ -99,18 +100,25 @@ export const techStack: Tech[] = [
   { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
   { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
   { name: "Supabase", Icon: SiSupabase, color: "#3FCF8E" },
-  { name: "NeonDB", letter: "N", letterBg: "#00E599" },
   { name: "Prisma", Icon: SiPrisma, color: "#ffffff" },
   { name: "OpenAI", Icon: SiOpenai, color: "#ffffff" },
   { name: "Gemini", Icon: SiGooglegemini, color: "#8E75B2" },
-  { name: "Qdrant", letter: "Q", letterBg: "#DC382D" },
   { name: "Docker", Icon: SiDocker, color: "#2496ED" },
   { name: "Vercel", Icon: SiVercel, color: "#ffffff" },
-  { name: "Cloudflare", Icon: SiCloudflare, color: "#F38020" },
-  { name: "AWS", Icon: FaAws, color: "#FF9900" },
-  { name: "GCP", Icon: SiGooglecloud, color: "#4285F4" },
-  { name: "Stripe", Icon: SiStripe, color: "#635BFF" },
-  { name: "Paddle", letter: "P", letterBg: "#FFD500" },
+  { name: "C++", Icon: SiCplusplus, color: "#00599C" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
+  { name: "SQL", letter: "SQL", letterBg: "#6B7280" },
+  { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
+  { name: "Express", Icon: SiExpress, color: "#ffffff" },
+  { name: "PyTorch", Icon: SiPytorch, color: "#EE4C2C" },
+  { name: "LangChain", Icon: SiLangchain, color: "#1C3C3C" },
+  { name: "NumPy", Icon: SiNumpy, color: "#013243" },
+  { name: "Pandas", Icon: SiPandas, color: "#150458" },
+  { name: "RAG", letter: "R", letterBg: "#6B7280" },
+  { name: "Scikit-learn", Icon: SiScikitlearn, color: "#F7931E" },
+  { name: "Socket.IO", Icon: SiSocketdotio, color: "#ffffff" },
+  { name: "WebRTC", Icon: SiWebrtc, color: "#333333" },
+
 ];
 
 export const socials: { label: string; href: string; Icon: IconType }[] = [

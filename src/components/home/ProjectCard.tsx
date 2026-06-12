@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Github, ExternalLink, X } from "lucide-react";
-import { Project } from "@/lib/data";
+import { Project, techStack } from "@/lib/data";
 import { blurReveal } from "@/lib/animations";
+import type { Tech } from "@/lib/data";
 
 let openProjectFn: ((p: Project) => void) | null = null;
 
@@ -147,15 +148,32 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                   transition={{ delay: 0.1, duration: 0.3 }}
                   className="mt-4 flex flex-wrap gap-2"
                 >
-                  {project.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs text-foreground"
-                    >
-                      <span className="size-1.5 rounded-full bg-muted-foreground/60" />
-                      {t}
-                    </span>
-                  ))}
+                  {project.tags.map((t) => {
+                    const match = techStack.find(
+                      (tech) =>
+                        tech.name.toLowerCase() === t.toLowerCase() ||
+                        t.toLowerCase().startsWith(tech.name.toLowerCase()) ||
+                        tech.name.toLowerCase().startsWith(t.toLowerCase()),
+                    );
+                    return (
+                      <span
+                        key={t}
+                        className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground"
+                      >
+                        {match?.Icon ? (
+                          <match.Icon className="size-4" style={{ color: match.color }} />
+                        ) : (
+                          <span
+                            className="inline-flex size-4 items-center justify-center rounded-sm text-[10px] font-bold text-black"
+                            style={{ background: match?.letterBg ?? "#6B7280" }}
+                          >
+                            {match?.letter ?? t.charAt(0)}
+                          </span>
+                        )}
+                        {t}
+                      </span>
+                    );
+                  })}
                 </motion.div>
 
                 {/* Description — slides in below the image */}

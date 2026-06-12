@@ -114,12 +114,12 @@ function Index() {
             </motion.div>
           </LayoutGroup>
           <div className="mt-5">
-            <a
+            {/* <a
               href="#"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               View Projects <ChevronRight className="size-4" />
-            </a>
+            </a> */}
           </div>
         </Section>
 
