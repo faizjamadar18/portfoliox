@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { SmoothCursor } from "@/components/SmoothCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import avatar from "@/assets/avatar.jpg";
 
 function NotFoundComponent() {
   return (
@@ -100,6 +101,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        type: "image/jpeg",
+        href: avatar,
       },
     ],
   }),
