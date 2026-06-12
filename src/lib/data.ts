@@ -14,6 +14,7 @@ import tryscribe from "@/assets/tryscribe.jpg";
 import synote from "@/assets/synote.jpg";
 import serein from "@/assets/serein.jpg";
 
+
 export const experience = [
   { role: "Product Engineer", company: "TryScribe", dates: "June 2025 - Present", letter: "T" },
   { role: "Full Stack Developer", company: "Codiest", dates: "Feb 2025 - Apr 2025", letter: "C" },
@@ -25,7 +26,7 @@ export const projects = [
     id: "zenshot",
     name: "ZenShot",
     desc: "A modern editor for builders to create viral visuals and share progress.",
-    img: zenshot,
+    img: ,
     longDesc:
       "A screenshot editor for founders to visualize progress, MRR and milestones using glass themes, remix layouts, and high res exports. Dockerized app & setup CI/CD workflow.",
     tags: ["Nextjs", "Supabase", "Docker", "CI/CD", "Cloudflare"],

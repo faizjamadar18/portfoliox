@@ -88,13 +88,13 @@ function Index() {
         >
           <a
             href="https://github.com/Shreyas-29"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
+            className="inline-flex items-center gap-1.5 rounded-md border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
           >
             <SiGithub className="size-4" /> GitHub
           </a>
           <a
             href="/resume.pdf"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-4 py-2 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
           >
             <HiDocumentText className="size-4" /> Resume
           </a>
@@ -130,7 +130,7 @@ function Index() {
               <motion.span
                 key={t.name}
                 variants={blurReveal}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
               >
                 {t.Icon ? (
                   <t.Icon className="size-4" style={{ color: t.color }} />
@@ -157,7 +157,7 @@ function Index() {
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900 px-3.5 py-2 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors"
                 >
                   <s.Icon className="size-4" />
                   {s.label}
