@@ -106,7 +106,7 @@ function Index() {
             <motion.div
               variants={staggerContainer(0.08)}
               data-cursor="view"
-              className="space-y-3"
+              className=""
             >
               {projects.map((p) => (
                 <ProjectCard key={p.id} project={p} />

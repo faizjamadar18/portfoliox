@@ -48,7 +48,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
         layoutId={`project-card-${project.id}`}
         onClick={() => setIsActive(true)}
         style={{ borderRadius: 12 }}
-        className="flex w-full items-center gap-4 p-3 text-left hover:bg-accent/40 transition-colors"
+        className="flex w-full items-center gap-4 text-left hover:bg-accent/40 transition-colors"
       >
         <motion.img
           layoutId={`project-image-${project.id}`}
