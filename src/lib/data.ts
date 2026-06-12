@@ -26,7 +26,7 @@ export const projects = [
     id: "zenshot",
     name: "ZenShot",
     desc: "A modern editor for builders to create viral visuals and share progress.",
-    img: ,
+    img: zenshot ,
     longDesc:
       "A screenshot editor for founders to visualize progress, MRR and milestones using glass themes, remix layouts, and high res exports. Dockerized app & setup CI/CD workflow.",
     tags: ["Nextjs", "Supabase", "Docker", "CI/CD", "Cloudflare"],
