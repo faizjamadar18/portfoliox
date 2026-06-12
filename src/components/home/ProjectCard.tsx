@@ -55,7 +55,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
           alt={project.name}
           loading="lazy"
           style={{ borderRadius: 8 }}
-          className="h-20 w-32 shrink-0 object-cover"
+          className="h-20 w-32 shrink-0 object-contain"
         />
         <motion.div className="min-w-0" layoutId={`project-text-${project.id}`}>
           <h3 className="text-base font-semibold text-foreground">
@@ -95,7 +95,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                 src={project.img}
                 alt={project.name}
                 style={{ borderRadius: 0 }}
-                className="h-62 w-full object-cover"
+                className="h-auto max-h-80 w-full object-contain bg-muted"
                 transition={springTransition}
               />
 

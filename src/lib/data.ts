@@ -9,10 +9,11 @@ import {
 import { FaAws, FaLinkedin } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
-import zenshot from "@/assets/zenshot.jpg";
-import tryscribe from "@/assets/tryscribe.jpg";
-import synote from "@/assets/synote.jpg";
-import serein from "@/assets/serein.jpg";
+import xpense from "@/assets/Xpense.png";
+import faizbook from "@/assets/faizbook.png";
+import docschat from "@/assets/docschat.png";
+import connectify from "@/assets/connectify.png";
+import attendx from "@/assets/Attendx.png";
 
 
 export const experience = [
@@ -23,48 +24,59 @@ export const experience = [
 
 export const projects = [
   {
-    id: "zenshot",
-    name: "ZenShot",
-    desc: "A modern editor for builders to create viral visuals and share progress.",
-    img: zenshot ,
+    id: "attendx",
+    name: "AttendX",
+    desc: "An AI-powered attendance platform that automates student tracking using computer vision and voice recognition.",
+    img: attendx,
     longDesc:
-      "A screenshot editor for founders to visualize progress, MRR and milestones using glass themes, remix layouts, and high res exports. Dockerized app & setup CI/CD workflow.",
-    tags: ["Nextjs", "Supabase", "Docker", "CI/CD", "Cloudflare"],
-    github: "https://github.com/Shreyas-29",
-    live: "https://zenshot.app/",
+      "An AI-powered attendance platform that automates student tracking using computer vision and voice recognition.",
+    tags: ["Python", "Scikit-learn", "Streamlit", "Supabase", "Computer Vision"],
+    github: "https://github.com/faizjamadar18/AttendX",
+    live: "https://attendx-landing.vercel.app",
   },
   {
-    id: "tryscribe",
-    name: "TryScribe",
-    desc: "A modern AI workspace with tools designed to save time and reduce effort.",
-    img: tryscribe,
+    id: "xpense",
+    name: "XpenseFlow",
+    desc: "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
+    img: xpense,
     longDesc:
-      "A modern AI workspace bundling writing, summarization, and research tools designed for productivity. Built with a polished UI and shipped to 130+ active users.",
-    tags: ["Nextjs", "TypeScript", "OpenAI", "Stripe", "Vercel"],
-    github: "https://github.com/Shreyas-29",
-    live: "https://tryscribe.in/",
+      "An intelligent finance platform that simplifies expense tracking, budgeting, and spending analysis with AI.",
+    tags: ["Next.js", "Clerk", "Supabase", "Prisma", "Gemini API"],
+    github: "https://github.com/faizjamadar18/Xpense-flow",
+    live: "https://xpenseflow.vercel.app",
   },
   {
-    id: "synote",
-    name: "Synote",
-    desc: "An AI note-taking app that generates notes and summaries using Gemini.",
-    img: synote,
+    id: "docschat",
+    name: "DocsChat",
+    desc: "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
+    img: docschat,
     longDesc:
-      "An AI note-taking app that auto-generates structured notes and concise summaries using Gemini, with a clean writing surface and quick capture flow.",
-    tags: ["Nextjs", "Gemini", "Prisma", "PostgreSQL"],
-    github: "https://github.com/Shreyas-29",
-    live: "#",
+      "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
+    tags: ["Next.js", "FastAPI", "LangChain", "ChromaDB", "Gemini", "RAG"],
+    github: "https://github.com/faizjamadar18/DocsChat",
+    live: "https://docschats.vercel.app",
   },
   {
-    id: "serein",
-    name: "Serein",
-    desc: "An editorial style habit tracking landing page focused on calm design.",
-    img: serein,
+    id: "faizbook",
+    name: "Faizbook",
+    desc: "A full-featured social media platform for creating content, building communities, and sharing experiences.",
+    img: faizbook,
     longDesc:
-      "An editorial style habit tracking landing page focused on calm design, refined typography, and a quiet visual rhythm that invites daily use.",
-    tags: ["Nextjs", "Tailwind", "Motion"],
-    github: "https://github.com/Shreyas-29",
-    live: "#",
+      "A full-featured social media platform for creating content, building communities, and sharing experiences.",
+    tags: ["Next.js", "Convex", "Gemini API", "ImageKit.io"],
+    github: "https://github.com/faizjamadar18/AI-content-creator-by-Faiz",
+    live: "https://faizbookx.vercel.app",
+  },
+  {
+    id: "connectify",
+    name: "Connectify",
+    desc: "A real-time communication platform for messaging, video calls, and seamless media sharing.",
+    img: connectify,
+    longDesc:
+      "A real-time communication platform for messaging, video calls, and seamless media sharing.",
+    tags: ["React", "Node.js", "MongoDB", "Socket.IO", "WebRTC", "JWT"],
+    github: "https://github.com/faizjamadar18/Connectify",
+    live: "https://connectifyx.vercel.app",
   },
 ];
 
@@ -122,7 +134,7 @@ export const songs = [
   },
   {
     title: "Die With A Smile",
-    artist: "Lady Gaga, Bruno Mars",
+    artist: "Lady Gaga, Bruno",
     url: "https://open.spotify.com/track/27WebcZ0fwAcdBxcx98b89",
     cover: "https://i.scdn.co/image/ab67616d0000b27382ea2e9e1858aa012c57cd45",
     color: "#4b90e2", // Blueish from the cover
