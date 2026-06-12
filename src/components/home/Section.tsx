@@ -17,7 +17,7 @@ export function Section({
       className="mt-16"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.25, margin: "0px 0px -15% 0px" }}
+      viewport={{ once: true, amount: 0.05, margin: "0px 0px 15% 0px" }}
       variants={staggerContainer(stagger)}
     >
       <motion.h2
