@@ -114,12 +114,11 @@ export const techStack: Tech[] = [
 ];
 
 export const socials: { label: string; href: string; Icon: IconType }[] = [
-  { label: "GitHub", href: "https://github.com/Shreyas-29", Icon: SiGithub },
-  { label: "Twitter", href: "https://twitter.com/shreyassihasane", Icon: SiX },
+  { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
+  { label: "Resume", href: "/resume.pdf", Icon: FileText as unknown as IconType },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: FaLinkedin },
-  { label: "Youtube", href: "https://heyshreyas.com/yt", Icon: SiYoutube },
-  // { label: "Notes", href: "https://www.heyshreyas.com/notes", Icon: FileText as unknown as IconType },
-  { label: "Email", href: "mailto:hello@heyshreyas.com", Icon: Mail as unknown as IconType },
+  { label: "Email", href: "mailto:faizjamadar18@gmail.com", Icon: Mail as unknown as IconType },
+  { label: "Twitter", href: "https://x.com/faizjamadar18", Icon: SiX },
 ];
 
 export const roles = ["Product Engineer", "Full Stack Developer", "UI Engineer", "Open Source Builder"];
