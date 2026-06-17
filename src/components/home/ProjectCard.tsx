@@ -25,13 +25,16 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
   // Lock scroll & listen for Escape when expanded
   useEffect(() => {
     if (!isActive) return;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsActive(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [isActive]);
