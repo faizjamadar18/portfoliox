@@ -12,6 +12,7 @@ import { TextFlipper } from "@/components/home/TextFlipper";
 import { Section } from "@/components/home/Section";
 import { ProjectCard } from "@/components/home/ProjectCard";
 import { NowPlaying } from "@/components/home/NowPlaying";
+import { VisitorCounter } from "@/components/home/VisitorCounter";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -167,8 +168,9 @@ function Index() {
           </ul>
         </Section>
 
-        <footer className="mt-20 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Faiz Jamadar
+        <footer className="mt-20 text-xs text-muted-foreground flex items-center justify-between">
+          <span>© {new Date().getFullYear()} Faiz Jamadar</span>
+          <VisitorCounter />
         </footer>
       </div>
     </main>

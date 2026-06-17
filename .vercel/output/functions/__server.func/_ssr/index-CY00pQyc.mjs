@@ -1,8 +1,8 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
-import { f as SiGithub, H as HiDocumentText, l as SiNextdotjs, z as SiTypescript, u as SiReact, y as SiTailwindcss, e as SiFramer, m as SiNodedotjs, s as SiPython, c as SiFastapi, d as SiFlask, q as SiPostgresql, j as SiMongodb, x as SiSupabase, r as SiPrisma, o as SiOpenai, g as SiGooglegemini, a as SiDocker, A as SiVercel, S as SiCplusplus, h as SiJavascript, k as SiMysql, b as SiExpress, t as SiPytorch, i as SiLangchain, n as SiNumpy, p as SiPandas, v as SiScikitlearn, w as SiSocketdotio, B as SiWebrtc, F as FaLinkedin, C as SiX } from "../_libs/react-icons.mjs";
-import { a as avatar } from "./router-BWaa9ixx.mjs";
+import { g as SiGithub, H as HiDocumentText, m as SiNextdotjs, A as SiTypescript, v as SiReact, z as SiTailwindcss, f as SiFramer, n as SiNodedotjs, t as SiPython, d as SiFastapi, e as SiFlask, r as SiPostgresql, k as SiMongodb, y as SiSupabase, s as SiPrisma, p as SiOpenai, h as SiGooglegemini, b as SiDocker, B as SiVercel, S as SiCplusplus, i as SiJavascript, l as SiMysql, c as SiExpress, u as SiPytorch, j as SiLangchain, o as SiNumpy, q as SiPandas, w as SiScikitlearn, x as SiSocketdotio, C as SiWebrtc, F as FaLinkedin, D as SiX, a as FiExternalLink } from "../_libs/react-icons.mjs";
+import { a as avatar } from "./router-DooYsPkm.mjs";
 import { m as motion, L as LayoutGroup, A as AnimatePresence } from "../_libs/framer-motion.mjs";
-import { F as FileText, M as Mail, G as Github, E as ExternalLink } from "../_libs/lucide-react.mjs";
+import { F as FileText, M as Mail } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
 import "../_libs/tanstack__react-router.mjs";
@@ -383,7 +383,7 @@ function ProjectCard({ project }) {
                           target: "_blank",
                           rel: "noreferrer",
                           className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-4" })
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(SiGithub, { className: "size-4" })
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -393,7 +393,7 @@ function ProjectCard({ project }) {
                           target: "_blank",
                           rel: "noreferrer",
                           className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "size-4" })
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(FiExternalLink, { className: "size-4" })
                         }
                       )
                     ]
@@ -527,12 +527,23 @@ function NowPlaying() {
     }
   );
 }
+function VisitorCounter() {
+  const [count, setCount] = reactExports.useState(null);
+  reactExports.useEffect(() => {
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/faizx-vercel-app-visitors").then((r) => r.json()).then((data) => setCount(Number(data.value))).catch(() => setCount(null));
+  }, []);
+  if (count === null) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+    count.toLocaleString(),
+    " visitors"
+  ] });
+}
 function Index() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-h-screen bg-background text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-2xl px-6 py-16 md:py-24", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "flex items-center gap-5", initial: "hidden", animate: "visible", variants: fadeUp, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: avatar, alt: "Faiz Jamadar", width: 72, height: 72, className: "size-[72px] rounded-2xl border border-border object-cover bg-muted" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-3xl font-semibold tracking-tight inline-flex items-center gap-1.5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-3xl font-semibold tracking-tight inline-flex items-center gap-2", children: [
           "Faiz Jamadar",
           /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 256 256", className: "size-5", "aria-label": "Verified", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { transform: "translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 30.091 10.131 L 30.091 10.131 c 5.28 -13.046 23.695 -13.207 29.202 -0.255 l 0 0 l 0 0 c 12.959 -5.491 26.093 7.416 20.829 20.469 l 0 0 l 0 0 c 13.046 5.28 13.207 23.695 0.255 29.202 l 0 0 l 0 0 c 5.491 12.959 -7.416 26.093 -20.469 20.829 l 0 0 l 0 0 c -5.28 13.046 -23.695 13.207 -29.202 0.255 l 0 0 l 0 0 C 17.748 86.122 4.613 73.215 9.878 60.162 l 0 0 l 0 0 C -3.169 54.881 -3.33 36.467 9.623 30.96 l 0 0 l 0 0 C 4.131 18.001 17.038 4.866 30.091 10.131 L 30.091 10.131 z", fill: "rgb(0,150,241)" }),
@@ -566,7 +577,7 @@ function Index() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "predictive modeling" }),
         ", and data-driven",
         " ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "AI/ML solutions" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "ML solutions" }),
         " — built to scale and ship."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -605,10 +616,13 @@ function Index() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(s.Icon, { className: "size-4" }),
       s.label
     ] }) }, s.label)) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "mt-20 text-xs text-muted-foreground", children: [
-      "© ",
-      (/* @__PURE__ */ new Date()).getFullYear(),
-      " Faiz Jamadar"
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "mt-20 text-xs text-muted-foreground flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+        "© ",
+        (/* @__PURE__ */ new Date()).getFullYear(),
+        " Faiz Jamadar"
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(VisitorCounter, {})
     ] })
   ] }) });
 }

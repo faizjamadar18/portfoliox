@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Github, ExternalLink, X } from "lucide-react";
+import { X } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { FiExternalLink } from "react-icons/fi";
 import { Project, techStack } from "@/lib/data";
 import { blurReveal } from "@/lib/animations";
 import type { Tech } from "@/lib/data";
@@ -130,7 +132,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                       rel="noreferrer"
                       className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
                     >
-                      <Github className="size-4" />
+                      <SiGithub className="size-4" />
                     </a>
                     <a
                       href={project.live}
@@ -138,7 +140,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                       rel="noreferrer"
                       className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
                     >
-                      <ExternalLink className="size-4" />
+                      <FiExternalLink className="size-4" />
                     </a>
                   </motion.div>
                 </div>

@@ -204,7 +204,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {})
   ] });
 }
-const $$splitComponentImporter = () => import("./index-Di5xtOhh.mjs");
+const $$splitComponentImporter = () => import("./index-CY00pQyc.mjs");
 const Route = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
