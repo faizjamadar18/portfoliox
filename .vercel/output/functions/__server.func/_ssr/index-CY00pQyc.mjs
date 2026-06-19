@@ -114,7 +114,7 @@ const techStack = [
 const socials = [
   { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
   { label: "Resume", href: "/resume.pdf", Icon: FileText },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: FaLinkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/faiz-jamadar-2859732a4", Icon: FaLinkedin },
   { label: "Email", href: "mailto:faizjamadar18@gmail.com", Icon: Mail },
   { label: "Twitter", href: "https://x.com/faizjamadar18", Icon: SiX }
 ];
@@ -204,24 +204,28 @@ const BlurredStagger = ({
       filter: "blur(0px)"
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    motion.h1,
-    {
-      variants: container,
-      initial: "hidden",
-      animate: "show",
-      className: "text-base",
-      children: headingText.split("").map((char, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        motion.span,
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        motion.h1,
         {
-          variants: letterAnimation,
-          transition: { duration: 0.3 },
-          children: char === " " ? " " : char
-        },
-        index
-      ))
-    }
-  ) }) });
+          variants: container,
+          initial: "hidden",
+          animate: "show",
+          className: "text-base",
+          children: headingText.split("").map((char, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.span,
+            {
+              variants: letterAnimation,
+              transition: { duration: 0.3 },
+              children: char === " " ? " " : char
+            },
+            index
+          ))
+        }
+      )
+    })
+  });
 };
 function TextFlipper() {
   const [index, setIndex] = reactExports.useState(0);
@@ -232,18 +236,22 @@ function TextFlipper() {
     const id = setInterval(advance, 3e3);
     return () => clearInterval(id);
   }, [advance]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative inline-flex h-[1.8em] overflow-hidden", style: { minWidth: 200 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    motion.div,
-    {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      exit: { opacity: 0, filter: "blur(8px)" },
-      transition: { duration: 0.3 },
-      className: "absolute left-0 top-0 whitespace-nowrap text-gray",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx(BlurredStagger, { text: roles[index] })
-    },
-    roles[index]
-  ) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+    className: "relative inline-flex h-[1.8em] overflow-hidden", style: { minWidth: 200 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, {
+      mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        motion.div,
+        {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          exit: { opacity: 0, filter: "blur(8px)" },
+          transition: { duration: 0.3 },
+          className: "absolute left-0 top-0 whitespace-nowrap text-gray",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(BlurredStagger, { text: roles[index] })
+        },
+        roles[index]
+      )
+    })
+  });
 }
 function Section({
   title,
@@ -260,13 +268,13 @@ function Section({
       variants: staggerContainer(stagger),
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.h2,
-          {
-            variants: blurReveal,
-            className: "text-xl font-semibold text-foreground mb-6",
-            children: title
-          }
-        ),
+        motion.h2,
+        {
+          variants: blurReveal,
+          className: "text-xl font-semibold text-foreground mb-6",
+          children: title
+        }
+      ),
         children
       ]
     }
@@ -294,17 +302,19 @@ function ProjectCard({ project }) {
     };
   }, [isActive]);
   const springTransition = { type: "spring", stiffness: 200, damping: 28 };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative", style: { minHeight: 104 }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      motion.button,
-      {
-        type: "button",
-        variants: blurReveal,
-        layoutId: `project-card-${project.id}`,
-        onClick: () => setIsActive(true),
-        style: { borderRadius: 12 },
-        className: "flex w-full items-center gap-4 text-left hover:bg-accent/40 transition-colors",
-        children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, {
+    children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+      className: "relative", style: { minHeight: 104 }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        motion.button,
+        {
+          type: "button",
+          variants: blurReveal,
+          layoutId: `project-card-${project.id}`,
+          onClick: () => setIsActive(true),
+          style: { borderRadius: 12 },
+          className: "flex w-full items-center gap-4 text-left hover:bg-accent/40 transition-colors",
+          children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.img,
             {
@@ -316,33 +326,38 @@ function ProjectCard({ project }) {
               className: "h-20 w-32 shrink-0 object-contain"
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "min-w-0", layoutId: `project-text-${project.id}`, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, {
+            className: "min-w-0", layoutId: `project-text-${project.id}`, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-foreground", children: project.name }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(motion.p, { layoutId: `project-desc-${project.id}`, className: "mt-1 text-sm text-muted-foreground line-clamp-2", children: project.desc })
-          ] })
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: isActive && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center p-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        motion.div,
-        {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-          transition: { duration: 0.3 },
-          onClick: () => setIsActive(false),
-          className: "absolute inset-0 bg-black/70 backdrop-blur-md"
+            ]
+          })
+          ]
         }
-      ),
+      )
+    }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, {
+      children: isActive && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+        className: "fixed inset-0 z-50 flex items-center justify-center p-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            exit: { opacity: 0 },
+            transition: { duration: 0.3 },
+            onClick: () => setIsActive(false),
+            className: "absolute inset-0 bg-black/70 backdrop-blur-md"
+          }
+        ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        motion.div,
-        {
-          layoutId: `project-card-${project.id}`,
-          style: { borderRadius: 16 },
-          className: "relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl",
-          transition: springTransition,
-          children: [
+          motion.div,
+          {
+            layoutId: `project-card-${project.id}`,
+            style: { borderRadius: 16 },
+            className: "relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl",
+            transition: springTransition,
+            children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               motion.img,
               {
@@ -354,8 +369,10 @@ function ProjectCard({ project }) {
                 transition: springTransition
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+              className: "p-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+                className: "flex items-start justify-between gap-4", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   motion.h3,
                   {
@@ -377,29 +394,30 @@ function ProjectCard({ project }) {
                     className: "flex gap-2",
                     children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "a",
-                        {
-                          href: project.github,
-                          target: "_blank",
-                          rel: "noreferrer",
-                          className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(SiGithub, { className: "size-4" })
-                        }
-                      ),
+                      "a",
+                      {
+                        href: project.github,
+                        target: "_blank",
+                        rel: "noreferrer",
+                        className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(SiGithub, { className: "size-4" })
+                      }
+                    ),
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "a",
-                        {
-                          href: project.live,
-                          target: "_blank",
-                          rel: "noreferrer",
-                          className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsx(FiExternalLink, { className: "size-4" })
-                        }
-                      )
+                      "a",
+                      {
+                        href: project.live,
+                        target: "_blank",
+                        rel: "noreferrer",
+                        className: "inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(FiExternalLink, { className: "size-4" })
+                      }
+                    )
                     ]
                   }
                 )
-              ] }),
+                ]
+              }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 motion.div,
                 {
@@ -442,15 +460,20 @@ function ProjectCard({ project }) {
                   children: project.longDesc
                 }
               )
-            ] })
-          ]
-        }
-      )
-    ] }) })
-  ] });
+              ]
+            })
+            ]
+          }
+        )
+        ]
+      })
+    })
+    ]
+  });
 }
 function PlayingAnimation({ className, style }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex items-end justify-between w-4 h-4 pt-[2px] pb-[2px] ${className ?? ""}`, style, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+    className: `flex items-end justify-between w-4 h-4 pt-[2px] pb-[2px] ${className ?? ""}`, style, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       motion.span,
       {
@@ -483,7 +506,8 @@ function PlayingAnimation({ className, style }) {
         transition: { duration: 1.2, repeat: Infinity, ease: "easeInOut", delay: 0.1 }
       }
     )
-  ] });
+    ]
+  });
 }
 function NowPlaying() {
   const [index, setIndex] = reactExports.useState(0);
@@ -504,25 +528,31 @@ function NowPlaying() {
       className: "mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors relative h-6 min-w-[300px]",
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(PlayingAnimation, { className: "shrink-0 transition-colors duration-500", style: { color: song.color } }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative flex-1 h-full overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          motion.div,
-          {
-            initial: { y: 20, opacity: 0 },
-            animate: { y: 0, opacity: 1 },
-            exit: { y: -20, opacity: 0 },
-            transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-            className: "absolute inset-0 flex gap-3 whitespace-nowrap",
-            children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+        className: "relative flex-1 h-full overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, {
+          mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            motion.div,
+            {
+              initial: { y: 20, opacity: 0 },
+              animate: { y: 0, opacity: 1 },
+              exit: { y: -20, opacity: 0 },
+              transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+              className: "absolute inset-0 flex gap-3 whitespace-nowrap",
+              children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: song.cover, alt: song.title, className: "size-5 rounded object-cover shadow-sm" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", {
+                children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: song.title }),
-                " · ",
-                song.artist
-              ] })
-            ]
-          },
-          song.url
-        ) }) })
+                  " · ",
+                  song.artist
+                ]
+              })
+              ]
+            },
+            song.url
+          )
+        })
+      })
       ]
     }
   );
@@ -533,98 +563,152 @@ function VisitorCounter() {
     fetch("https://countapi.mileshilliard.com/api/v1/hit/faizx-vercel-app-visitors").then((r) => r.json()).then((data) => setCount(Number(data.value))).catch(() => setCount(null));
   }, []);
   if (count === null) return null;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-    count.toLocaleString(),
-    " visitors"
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("span", {
+    children: [
+      count.toLocaleString(),
+      " visitors"
+    ]
+  });
 }
 function Index() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-h-screen bg-background text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-2xl px-6 py-16 md:py-24", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "flex items-center gap-5", initial: "hidden", animate: "visible", variants: fadeUp, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("main", {
+    className: "min-h-screen bg-background text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+      className: "mx-auto max-w-2xl px-6 py-16 md:py-24", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, {
+        className: "flex items-center gap-5", initial: "hidden", animate: "visible", variants: fadeUp, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: avatar, alt: "Faiz Jamadar", width: 72, height: 72, className: "size-[72px] rounded-2xl border border-border object-cover bg-muted" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "text-3xl font-semibold tracking-tight inline-flex items-center gap-2", children: [
-          "Faiz Jamadar",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 256 256", className: "size-5", "aria-label": "Verified", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", { transform: "translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+          children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", {
+            className: "text-3xl font-semibold tracking-tight inline-flex items-center gap-2", children: [
+              "Faiz Jamadar",
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", {
+                xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 256 256", className: "size-5", "aria-label": "Verified", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("g", {
+                  transform: "translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M 30.091 10.131 L 30.091 10.131 c 5.28 -13.046 23.695 -13.207 29.202 -0.255 l 0 0 l 0 0 c 12.959 -5.491 26.093 7.416 20.829 20.469 l 0 0 l 0 0 c 13.046 5.28 13.207 23.695 0.255 29.202 l 0 0 l 0 0 c 5.491 12.959 -7.416 26.093 -20.469 20.829 l 0 0 l 0 0 c -5.28 13.046 -23.695 13.207 -29.202 0.255 l 0 0 l 0 0 C 17.748 86.122 4.613 73.215 9.878 60.162 l 0 0 l 0 0 C -3.169 54.881 -3.33 36.467 9.623 30.96 l 0 0 l 0 0 C 4.131 18.001 17.038 4.866 30.091 10.131 L 30.091 10.131 z", fill: "rgb(0,150,241)" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("polygon", { points: "39.66,63.79 23.36,47.76 28.97,42.05 39.3,52.21 59.6,29.58 65.56,34.93", fill: "rgb(255,255,255)" })
-          ] }) })
-        ] }),
+                  ]
+                })
+              })
+            ]
+          }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TextFlipper, {}) })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "mt-8 space-y-5 text-[15px] leading-relaxed text-muted-foreground", initial: "hidden", animate: "visible", variants: fadeUp, custom: 1, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "A ",
+          ]
+        })
+        ]
+      }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, {
+        className: "mt-8 space-y-5 text-[15px] leading-relaxed text-muted-foreground", initial: "hidden", animate: "visible", variants: fadeUp, custom: 1, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", {
+          children: [
+            "A ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "Software Developer & AI Engineer" }),
-        " with",
-        " ",
+            " with",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "1.5+ years" }),
-        " of hands-on experience building impactful products and solving real-world problems with",
-        " ",
+            " of hands-on experience building impactful products and solving real-world problems with",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "up-to-date technologies" }),
-        "."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-base", children: [
-        "Skilled in production-ready",
-        " ",
+            "."
+          ]
+        }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", {
+          className: "text-base", children: [
+            "Skilled in production-ready",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "Full-Stack Development" }),
-        ",",
-        " ",
+            ",",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "AI Automations" }),
-        ", intelligent",
-        " ",
+            ", intelligent",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "predictive modeling" }),
-        ", and data-driven",
-        " ",
+            ", and data-driven",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "ML solutions" }),
-        " — built to scale and ship."
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-        "Open to ",
+            " — built to scale and ship."
+          ]
+        }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", {
+          children: [
+            "Open to ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "full-time roles" }),
-        " and",
-        " ",
+            " and",
+            " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-foreground font-medium", children: "collaborations" }),
-        "."
-      ] })
-    ] }),
+            "."
+          ]
+        })
+        ]
+      }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: "hidden", animate: "visible", variants: fadeUp, custom: 2, children: /* @__PURE__ */ jsxRuntimeExports.jsx(NowPlaying, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "mt-6 flex flex-wrap gap-3", initial: "hidden", animate: "visible", variants: fadeUp, custom: 3, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://github.com/faizjamadar18", className: "inline-flex items-center gap-1.5 rounded-md border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, {
+        className: "mt-6 flex flex-wrap gap-3", initial: "hidden", animate: "visible", variants: fadeUp, custom: 3, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", {
+          href: "https://github.com/faizjamadar18", className: "inline-flex items-center gap-1.5 rounded-md border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(SiGithub, { className: "size-4" }),
-        " GitHub"
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/resume.pdf", className: "inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]", children: [
+            " GitHub"
+          ]
+        }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("a", {
+          href: "/resume.pdf", className: "inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(HiDocumentText, { className: "size-4" }),
-        " Resume"
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, { title: "Projects", children: [
+            " Resume"
+          ]
+        })
+        ]
+      }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Section, {
+        title: "Projects", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(LayoutGroup, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: staggerContainer(0.08), "data-cursor": "view", className: "", children: projects.map((p) => /* @__PURE__ */ jsxRuntimeExports.jsx(ProjectCard, { project: p }, p.id)) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { title: "Tech Stack", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-3", children: techStack.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.span, { variants: blurReveal, className: "inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors", children: [
-      t.Icon ? /* @__PURE__ */ jsxRuntimeExports.jsx(t.Icon, { className: "size-4", style: {
-        color: t.color
-      } }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex size-4 items-center justify-center rounded-sm text-[10px] font-bold text-black", style: {
-        background: t.letterBg
-      }, children: t.letter }),
-      t.name
-    ] }, t.name)) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Section, { title: "Get In Touch", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "flex flex-wrap gap-3", children: socials.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(motion.li, { variants: blurReveal, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: s.href, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors", children: [
+        ]
+      }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Section, {
+        title: "Tech Stack", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+          className: "flex flex-wrap gap-3", children: techStack.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.span, {
+            variants: blurReveal, className: "inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors", children: [
+              t.Icon ? /* @__PURE__ */ jsxRuntimeExports.jsx(t.Icon, {
+                className: "size-4", style: {
+                  color: t.color
+                }
+              }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", {
+                className: "inline-flex size-4 items-center justify-center rounded-sm text-[10px] font-bold text-black", style: {
+                  background: t.letterBg
+                }, children: t.letter
+              }),
+              t.name
+            ]
+          }, t.name))
+        })
+      }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Section, {
+        title: "Get In Touch", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", {
+          className: "flex flex-wrap gap-3", children: socials.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(motion.li, {
+            variants: blurReveal, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", {
+              href: s.href, target: "_blank", rel: "noreferrer", className: "inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground hover:bg-neutral-800 transition-colors", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(s.Icon, { className: "size-4" }),
-      s.label
-    ] }) }, s.label)) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "mt-20 text-xs text-muted-foreground flex items-center justify-between", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-        "© ",
-        (/* @__PURE__ */ new Date()).getFullYear(),
-        " Faiz Jamadar"
-      ] }),
+                s.label
+              ]
+            })
+          }, s.label))
+        })
+      }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", {
+        className: "mt-20 text-xs text-muted-foreground flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", {
+          children: [
+            "© ",
+            (/* @__PURE__ */ new Date()).getFullYear(),
+            " Faiz Jamadar"
+          ]
+        }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(VisitorCounter, {})
-    ] })
-  ] }) });
+        ]
+      })
+      ]
+    })
+  });
 }
 export {
   Index as component
