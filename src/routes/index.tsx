@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-xl px-6 py-16 md:py-24">
         {/* Header */}
         <motion.div
           className="flex items-center gap-5"
