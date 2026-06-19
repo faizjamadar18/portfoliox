@@ -100,48 +100,60 @@ function SmoothScroll() {
 }
 const avatar = "/assets/avatar-BV1rkR7-.jpg";
 function NotFoundComponent() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+    className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+      className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-4 text-xl font-semibold text-foreground", children: "Page not found" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "The page you're looking for doesn't exist or has been moved." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Link,
-      {
-        to: "/",
-        className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
-        children: "Go home"
-      }
-    ) })
-  ] }) });
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+        className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Link,
+          {
+            to: "/",
+            className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
+            children: "Go home"
+          }
+        )
+      })
+      ]
+    })
+  });
 }
 function ErrorComponent({ error, reset }) {
   console.error(error);
   const router2 = useRouter();
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+    className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+      className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-semibold tracking-tight text-foreground", children: "This page didn't load" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "Something went wrong on our end. You can try refreshing or head back home." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 flex flex-wrap justify-center gap-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
+        className: "mt-6 flex flex-wrap justify-center gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: () => {
-            router2.invalidate();
-            reset();
-          },
-          className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
-          children: "Try again"
-        }
-      ),
+          "button",
+          {
+            onClick: () => {
+              router2.invalidate();
+              reset();
+            },
+            className: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90",
+            children: "Try again"
+          }
+        ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "a",
-        {
-          href: "/",
-          className: "inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent",
-          children: "Go home"
-        }
-      )
-    ] })
-  ] }) });
+          "a",
+          {
+            href: "/",
+            className: "inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent",
+            children: "Go home"
+          }
+        )
+        ]
+      })
+      ]
+    })
+  });
 }
 const Route$1 = createRootRouteWithContext()({
   head: () => ({
@@ -150,8 +162,8 @@ const Route$1 = createRootRouteWithContext()({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Faiz Jamadar — Product Engineer" },
       { name: "description", content: "Full-stack engineer who builds products from concept to launch." },
-      { name: "author", content: "Shreyas Sihasane" },
-      { property: "og:title", content: "Shreyas Sihasane — Product Engineer" },
+      { name: "author", content: "Faiz Jamadar" },
+      { property: "og:title", content: "Faiz Jamadar — Product Engineer" },
       { property: "og:description", content: "Full-stack engineer who builds products from concept to launch." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -188,21 +200,27 @@ const Route$1 = createRootRouteWithContext()({
   errorComponent: ErrorComponent
 });
 function RootShell({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", { lang: "en", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", {
+    lang: "en", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("head", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(HeadContent, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("body", { children: [
-      children,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("body", {
+      children: [
+        children,
       /* @__PURE__ */ jsxRuntimeExports.jsx(Scripts, {})
-    ] })
-  ] });
+      ]
+    })
+    ]
+  });
 }
 function RootComponent() {
   const { queryClient } = Route$1.useRouteContext();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(QueryClientProvider, { client: queryClient, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(QueryClientProvider, {
+    client: queryClient, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(SmoothScroll, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(SmoothCursor, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {})
-  ] });
+    ]
+  });
 }
 const $$splitComponentImporter = () => import("./index-CY00pQyc.mjs");
 const Route = createFileRoute("/")({
