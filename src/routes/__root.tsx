@@ -77,12 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Faiz Jamadar — Product Engineer" },
       { name: "description", content: "Full-stack engineer who builds products from concept to launch." },
-      { name: "author", content: "Shreyas Sihasane" },
-      { property: "og:title", content: "Shreyas Sihasane — Product Engineer" },
+      { name: "author", content: "Faiz Jamadar" },
+      { property: "og:title", content: "Faiz Jamadar — Product Engineer" },
       { property: "og:description", content: "Full-stack engineer who builds products from concept to launch." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@faizjamadar18" },
     ],
     links: [
       {

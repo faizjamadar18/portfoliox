@@ -43,7 +43,7 @@ export const projects = [
     img: docschat,
     longDesc:
       "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
-    tags: ["Next.js", "FastAPI","RAG", "LangChain", "ChromaDB", "Gemini"],
+    tags: ["Next.js", "FastAPI", "RAG", "LangChain", "ChromaDB", "Gemini"],
     github: "https://github.com/faizjamadar18/DocsChat",
     live: "https://docschats.vercel.app",
   },
@@ -124,7 +124,7 @@ export const techStack: Tech[] = [
 export const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
   { label: "Resume", href: "/resume.pdf", Icon: FileText as unknown as IconType },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/shreyas-sihasane", Icon: FaLinkedin },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/faiz-jamadar-2859732a4", Icon: FaLinkedin },
   { label: "Email", href: "mailto:faizjamadar18@gmail.com", Icon: Mail as unknown as IconType },
   { label: "Twitter", href: "https://x.com/faizjamadar18", Icon: SiX },
 ];
