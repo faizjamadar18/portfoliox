@@ -123,7 +123,7 @@ export const techStack: Tech[] = [
 
 export const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
-  { label: "Resume", href: "/resume.pdf", Icon: FileText as unknown as IconType },
+  { label: "Resume", href: "https://drive.google.com/file/d/1uuMm5FXXjjXnBtj7xf0A1Xj7bFcL9doq/view", Icon: FileText as unknown as IconType },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/faiz-jamadar-2859732a4", Icon: FaLinkedin },
   { label: "Email", href: "mailto:faizjamadar18@gmail.com", Icon: Mail as unknown as IconType },
   { label: "Twitter", href: "https://x.com/faizjamadar18", Icon: SiX },
