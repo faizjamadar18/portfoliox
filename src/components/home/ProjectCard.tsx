@@ -11,7 +11,6 @@ let openProjectFn: ((p: Project) => void) | null = null;
 
 export function ProjectCard({ project }: { project: Project; index?: number }) {
   const [isActive, setIsActive] = useState(false);
-  const [showControls, setShowControls] = useState(false);
 
   useEffect(() => {
     // Register this card so the shared opener can target it
@@ -28,7 +27,6 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
   // Lock scroll & listen for Escape when expanded
   useEffect(() => {
     if (!isActive) return;
-    setShowControls(false);
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -57,18 +55,14 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
         style={{ borderRadius: 12 }}
         className="flex w-full items-center gap-4 text-left hover:bg-accent/40 transition-colors"
       >
-        <motion.div
+        <motion.img
           layoutId={`project-image-${project.id}`}
+          src={project.img}
+          alt={project.name}
+          loading="lazy"
           style={{ borderRadius: 8 }}
-          className="h-20 w-32 shrink-0 overflow-hidden"
-        >
-          <img
-            src={project.img}
-            alt={project.name}
-            loading="lazy"
-            className="h-full w-full object-contain"
-          />
-        </motion.div>
+          className="h-20 w-32 shrink-0 object-contain"
+        />
         <motion.div className="min-w-0" layoutId={`project-text-${project.id}`}>
           <h3 className="text-base font-semibold text-foreground">
             {project.name}
@@ -101,33 +95,15 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
               className="relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl"
               transition={springTransition}
             >
-              {/* Image/video morphs from small thumbnail to full-width hero */}
-              <motion.div
+              {/* Image morphs from small thumbnail to full-width hero */}
+              <motion.img
                 layoutId={`project-image-${project.id}`}
+                src={project.img}
+                alt={project.name}
                 style={{ borderRadius: 0 }}
-                className="h-auto max-h-80 w-full overflow-hidden bg-muted"
+                className="h-auto max-h-80 w-full object-contain bg-muted"
                 transition={springTransition}
-              >
-                {project.video ? (
-                  <div onClick={() => setShowControls(true)} className="h-auto max-h-80 w-full">
-                    <video
-                      src={project.video}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      controls={showControls}
-                      className="h-auto max-h-80 w-full object-contain"
-                    />
-                  </div>
-                ) : (
-                  <img
-                    src={project.img}
-                    alt={project.name}
-                    className="h-auto max-h-80 w-full object-contain"
-                  />
-                )}
-              </motion.div>
+              />
 
       
 
