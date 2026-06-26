@@ -59,6 +59,7 @@ function Index() {
           <p className="text-base">
             Skilled in production-ready{" "}
             <span className="text-foreground font-medium">Full-Stack Development</span>,{" "}
+            <span className="text-foreground font-medium">Product Building</span>,{" "}
             <span className="text-foreground font-medium">AI Automations</span>, intelligent{" "}
             <span className="text-foreground font-medium">predictive modeling</span>, and data-driven{" "}
             <span className="text-foreground font-medium">ML solutions</span> — built to scale and ship.
