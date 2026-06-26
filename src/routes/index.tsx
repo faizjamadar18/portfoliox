@@ -94,7 +94,9 @@ function Index() {
             <SiGithub className="size-4" /> GitHub
           </a>
           <a
-            href="/resume.pdf"
+            href="https://drive.google.com/file/d/1uuMm5FXXjjXnBtj7xf0A1Xj7bFcL9doq/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg border border-white/20 bg-neutral-900 px-1.5 py-1.5 text-sm font-medium text-foreground hover:bg-neutral-800 transition-colors shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_1px_2px_0_rgba(0,0,0,0.6),0_4px_12px_-2px_rgba(0,0,0,0.5)]"
           >
             <HiDocumentText className="size-4" /> Resume
