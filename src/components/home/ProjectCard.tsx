@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
-import { SiGithub } from "react-icons/si";
+import { SiGithub, SiYoutube } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
 import { Project, techStack } from "@/lib/data";
 import { blurReveal } from "@/lib/animations";
@@ -142,6 +142,16 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                     >
                       <FiExternalLink className="size-4" />
                     </a>
+                    {"video" in project && (
+                      <a
+                        href={project.video}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                      >
+                        <SiYoutube className="size-4" />
+                      </a>
+                    )}
                   </motion.div>
                 </div>
 

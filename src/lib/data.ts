@@ -57,6 +57,7 @@ export const projects = [
     tags: ["Next.js", "Supabase", "Prisma", "Gemini"],
     github: "https://github.com/faizjamadar18/Xpense-flow",
     live: "https://xpenseflow.vercel.app",
+    video: "https://www.youtube.com/watch?v=JfZncqAAA4E",
   },
 
   {
@@ -69,6 +70,7 @@ export const projects = [
     tags: ["Next.js", "Convex", "Gemini API", "ImageKit.io"],
     github: "https://github.com/faizjamadar18/AI-content-creator-by-Faiz",
     live: "https://faizbookx.vercel.app",
+    video: "https://www.youtube.com/watch?v=otJTqngjOIE",
   },
   {
     id: "connectify",
@@ -80,6 +82,7 @@ export const projects = [
     tags: ["React", "Node.js", "MongoDB", "Socket.IO", "WebRTC", "JWT"],
     github: "https://github.com/faizjamadar18/Connectify",
     live: "https://connectifyx.vercel.app",
+    video: "https://www.youtube.com/watch?v=sB_HajZ6AN0",
   },
 ];
 
