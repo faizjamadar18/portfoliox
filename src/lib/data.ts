@@ -17,11 +17,16 @@ import docschat from "@/assets/docschat.png";
 import connectify from "@/assets/connectify.png";
 import attendx from "@/assets/Attendx.png";
 
+export type ExperienceItemType = { role: string; company: string; dates: string; desc?: string; letter?: string; logo?: string };
 
-export const experience = [
-  { role: "Product Engineer", company: "TryScribe", dates: "June 2025 - Present", letter: "T" },
-  { role: "Full Stack Developer", company: "Codiest", dates: "Feb 2025 - Apr 2025", letter: "C" },
-  { role: "Frontend Developer", company: "Polymath AI", dates: "Jun 2024 - Aug 2024", letter: "P" },
+export const experience: ExperienceItemType[] = [
+  { 
+    role: "Software Developer Intern", 
+    company: "ModelSuite.ai", 
+    dates: "May 2026 - Aug 2026", 
+    logo: "https://www.modelsuite.ai/apple-touch-icon.png",
+    desc: "Contributed to a modular HCM and resource planning platform, building production-ready interfaces and optimizing APIs, caching, and AI-powered workflows to improve system performance and automation."
+  }
 ];
 
 export const projects = [
