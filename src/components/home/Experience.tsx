@@ -28,7 +28,7 @@ function ExperienceItem({ exp }: { exp: typeof experience[number] }) {
     >
       <button
         onClick={() => hasDesc && setIsOpen(!isOpen)}
-        className={`flex w-full items-center justify-between p-3 rounded-xl hover:bg-accent/40 transition-colors ${!hasDesc ? "cursor-default" : ""}`}
+        className={`flex flex-col sm:flex-row w-full items-start sm:items-center justify-between p-3 rounded-xl hover:bg-accent/40 transition-colors gap-2 sm:gap-0 ${!hasDesc ? "cursor-default" : ""}`}
       >
         <div className="flex flex-col items-start gap-1.5">
           <h3 className="text-[17px] font-medium text-foreground">{exp.role}</h3>
@@ -44,7 +44,7 @@ function ExperienceItem({ exp }: { exp: typeof experience[number] }) {
           </div>
         </div>
         
-        <div className="flex items-center gap-3 text-[14px] text-muted-foreground">
+        <div className="flex items-center gap-3 text-[14px] text-muted-foreground w-full sm:w-auto justify-between sm:justify-end mt-1 sm:mt-0">
           <span>{exp.dates}</span>
           {hasDesc && (
             isOpen ? <ChevronDown className="size-4" /> : <ChevronRight className="size-4" />
