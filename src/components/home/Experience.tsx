@@ -28,15 +28,16 @@ function ExperienceItem({ exp }: { exp: typeof experience[number] }) {
     >
       <button
         onClick={() => hasDesc && setIsOpen(!isOpen)}
+        data-cursor={hasDesc ? "expand" : undefined}
         className={`flex flex-col sm:flex-row w-full items-start sm:items-center justify-between p-3 rounded-xl hover:bg-accent/40 transition-colors gap-2 sm:gap-0 ${!hasDesc ? "cursor-default" : ""}`}
       >
         <div className="flex flex-col items-start gap-1.5">
           <h3 className="text-[17px] font-medium text-foreground">{exp.role}</h3>
           <div className="flex items-center gap-2 text-[15px] text-muted-foreground">
             {exp.logo ? (
-              <img src={exp.logo} alt={exp.company} className="size-[24px] rounded-md border-1 border-white/20 object-cover bg-black" />
+              <img src={exp.logo} alt={exp.company} className="size-6 rounded-md border border-white/20 object-cover bg-black" />
             ) : exp.letter && (
-              <span className="inline-flex size-[24px] items-center justify-center rounded-md bg-black border border-white/10 text-[12px] font-bold text-[#ff7b00]">
+              <span className="inline-flex size-6 items-center justify-center rounded-md bg-black border border-white/10 text-[12px] font-bold text-[#ff7b00]">
                 {exp.letter}
               </span>
             )}
