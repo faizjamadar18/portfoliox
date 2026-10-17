@@ -16,6 +16,8 @@ import faizbook from "@/assets/faizbook.png";
 import docschat from "@/assets/docschat.png";
 import connectify from "@/assets/connectify.png";
 import attendx from "@/assets/Attendx.png";
+import quello from "@/assets/Quello.png";
+import modelsuite from "@/assets/modelsuite.png";
 
 export type ExperienceItemType = { role: string; company: string; dates: string; desc?: string; letter?: string; logo?: string };
 
@@ -24,12 +26,23 @@ export const experience: ExperienceItemType[] = [
     role: "Software Developer Intern", 
     company: "ModelSuite.ai", 
     dates: "May 2026 - Aug 2026", 
-    logo: "https://www.modelsuite.ai/apple-touch-icon.png",
+    logo: modelsuite,
     desc: "Contributed to a modular HCM and resource planning platform, building production-ready interfaces and optimizing APIs, caching, and AI-powered workflows to improve system performance and automation."
   }
 ];
 
 export const projects = [
+  {
+    id: "quello",
+    name: "Quello",
+    desc: "Bring what you already use into one workspace, for teams and for individuals. Ask in plain language, and every answer links to its evidence, one click away.",
+    img: quello,
+    longDesc:
+      "Bring what you already use into one workspace, for teams and for individuals. Ask in plain language, and every answer links to its evidence, one click away.",
+    tags: ["Next.js", "TypeScript", "FastAPI", "Python", "MongoDB", "Qdrant", "Cloudflare R2"],
+    github: "https://github.com/faizjamadar18/Quello",
+    live: "https://github.com/faizjamadar18",
+  },
   {
     id: "attendx",
     name: "AttendX",
