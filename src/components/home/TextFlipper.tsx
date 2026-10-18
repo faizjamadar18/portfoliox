@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState, useCallback } from "react";
 import { roles } from "@/lib/data";
-import { BlurredStagger } from "@/components/ui/blurred-stagger-text";
 
 export function TextFlipper() {
   const [index, setIndex] = useState(0);
@@ -15,20 +14,33 @@ export function TextFlipper() {
     return () => clearInterval(id);
   }, [advance]);
 
+  const currentRole = roles[index];
+
   return (
-    <span className="relative inline-flex h-[1.8em] overflow-hidden" style={{ minWidth: 200 }}>
+    <div className="text-sm lg:text-base text-muted-foreground flex items-center h-6 overflow-hidden">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={roles[index]}
+        <motion.p
+          key={currentRole}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, filter: "blur(8px)" }}
-          transition={{ duration: 0.3 }}
-          className="absolute left-0 top-0 whitespace-nowrap text-gray"
+          exit={{ opacity: 0, filter: "blur(6px)", transition: { duration: 0.2 } }}
+          className="relative inline-block whitespace-nowrap"
         >
-          <BlurredStagger text={roles[index]} />
-        </motion.div>
+          <span className="inline-block">
+            {currentRole.split("").map((char, i) => (
+              <motion.span
+                key={`${char}-${i}`}
+                initial={{ opacity: 0, filter: "blur(10px)", y: 4 }}
+                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                transition={{ delay: 0.02 * i, duration: 0.25 }}
+                className="inline-block"
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </span>
+        </motion.p>
       </AnimatePresence>
-    </span>
+    </div>
   );
 }

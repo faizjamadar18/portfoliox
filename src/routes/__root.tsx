@@ -6,10 +6,10 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  ErrorComponentProps,
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { SmoothCursor } from "@/components/SmoothCursor";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import avatar from "@/assets/avatar.jpg";
 
@@ -35,7 +35,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
 
@@ -76,10 +76,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Faiz Jamadar — Product Engineer" },
-      { name: "description", content: "Full-stack engineer who builds products from concept to launch." },
+      {
+        name: "description",
+        content: "Full-stack engineer who builds products from concept to launch.",
+      },
       { name: "author", content: "Faiz Jamadar" },
       { property: "og:title", content: "Faiz Jamadar — Product Engineer" },
-      { property: "og:description", content: "Full-stack engineer who builds products from concept to launch." },
+      {
+        property: "og:description",
+        content: "Full-stack engineer who builds products from concept to launch.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@faizjamadar18" },
@@ -117,11 +123,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-dvh bg-background text-foreground antialiased font-medium relative dark">
         {children}
         <Scripts />
       </body>
@@ -135,7 +141,6 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SmoothScroll />
-      <SmoothCursor />
       <Outlet />
     </QueryClientProvider>
   );

@@ -1,16 +1,12 @@
-"use client" 
+"use client";
 
-import * as React from "react"
- 
+import * as React from "react";
+
 import { motion } from "motion/react";
- 
-export const BlurredStagger = ({
-  text = "we love hextaui.com ❤️",
-}: {
-  text: string;
-}) => {
+
+export const BlurredStagger = ({ text = "we love hextaui.com ❤️" }: { text: string }) => {
   const headingText = text;
- 
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -20,7 +16,7 @@ export const BlurredStagger = ({
       },
     },
   };
- 
+
   const letterAnimation = {
     hidden: {
       opacity: 0,
@@ -31,22 +27,13 @@ export const BlurredStagger = ({
       filter: "blur(0px)",
     },
   };
- 
+
   return (
     <>
       <div>
-        <motion.h1
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="text-base"
-        >
+        <motion.h1 variants={container} initial="hidden" animate="show" className="text-base">
           {headingText.split("").map((char, index) => (
-            <motion.span
-              key={index}
-              variants={letterAnimation}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.span key={index} variants={letterAnimation} transition={{ duration: 0.3 }}>
               {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}

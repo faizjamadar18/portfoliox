@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronRight, ChevronDown } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Section } from "./Section";
 import { experience } from "@/lib/data";
 import { blurReveal, staggerContainer } from "@/lib/animations";
@@ -8,62 +8,73 @@ import { blurReveal, staggerContainer } from "@/lib/animations";
 export function Experience() {
   return (
     <Section title="Experience">
-      <motion.div variants={staggerContainer(0.08)} className="space-y-2">
+      <motion.div variants={staggerContainer(0.08)} className="flex flex-col gap-6 w-full">
         {experience.map((exp, i) => (
-          <ExperienceItem key={i} exp={exp} />
+          <ExperienceItem key={exp.company + i} exp={exp} />
         ))}
       </motion.div>
     </Section>
   );
 }
 
-function ExperienceItem({ exp }: { exp: typeof experience[number] }) {
+function ExperienceItem({ exp }: { exp: (typeof experience)[number] }) {
   const [isOpen, setIsOpen] = useState(false);
   const hasDesc = !!exp.desc;
 
   return (
     <motion.div
       variants={blurReveal}
-      className="group rounded-xl -mx-3"
+      layout
+      onClick={() => hasDesc && setIsOpen(!isOpen)}
+      className={`group relative flex flex-col justify-between transition-all duration-300 select-none ${hasDesc ? "cursor-pointer" : "cursor-default"}`}
     >
-      <button
-        onClick={() => hasDesc && setIsOpen(!isOpen)}
-        data-cursor={hasDesc ? "expand" : undefined}
-        className={`flex flex-col sm:flex-row w-full items-start sm:items-center justify-between p-3 rounded-xl hover:bg-accent/40 transition-colors gap-2 sm:gap-0 ${!hasDesc ? "cursor-default" : ""}`}
-      >
-        <div className="flex flex-col items-start gap-1.5">
-          <h3 className="text-[17px] font-medium text-foreground">{exp.role}</h3>
-          <div className="flex items-center gap-2 text-[15px] text-muted-foreground">
-            {exp.logo ? (
-              <img src={exp.logo} alt={exp.company} className="size-6 rounded-md border border-white/20 object-cover bg-black" />
-            ) : exp.letter && (
-              <span className="inline-flex size-6 items-center justify-center rounded-md bg-black border border-white/10 text-[12px] font-bold text-[#ff7b00]">
-                {exp.letter}
-              </span>
-            )}
-            <span>{exp.company}</span>
+      <motion.div layout="position" className="flex items-center justify-between w-full">
+        <div className="flex flex-col gap-1">
+          <motion.h3
+            layout
+            className="text-base font-medium text-foreground group-hover:text-primary transition-colors"
+          >
+            {exp.role}
+          </motion.h3>
+          <div className="flex items-center gap-2">
+            <motion.div
+              layout
+              className="size-5 rounded-sm border border-foreground/10 squircle relative overflow-hidden shrink-0 bg-neutral-900 flex items-center justify-center"
+            >
+              {exp.logo ? (
+                <img src={exp.logo} alt={exp.company} className="size-full object-cover" />
+              ) : exp.letter ? (
+                <span className="text-[10px] font-bold text-foreground">{exp.letter}</span>
+              ) : null}
+            </motion.div>
+            <motion.span layout className="text-sm text-muted-foreground">
+              {exp.company}
+            </motion.span>
           </div>
         </div>
-        
-        <div className="flex items-center gap-3 text-[14px] text-muted-foreground w-full sm:w-auto justify-between sm:justify-end mt-1 sm:mt-0">
-          <span>{exp.dates}</span>
+
+        <div className="flex items-center gap-4">
+          <motion.span layout className="text-sm text-muted-foreground hidden md:block">
+            {exp.dates}
+          </motion.span>
           {hasDesc && (
-            isOpen ? <ChevronDown className="size-4" /> : <ChevronRight className="size-4" />
+            <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+              <ChevronRight className="size-4 text-muted-foreground/50 group-hover:text-foreground transition-colors" />
+            </motion.div>
           )}
         </div>
-      </button>
-      
+      </motion.div>
+
       <AnimatePresence>
         {isOpen && hasDesc && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+            animate={{ opacity: 1, height: "auto", marginTop: 12 }}
+            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="px-3 pb-3 pt-1 text-[15px] leading-[1.6] text-foreground text-left font-medium">
-              {exp.desc}
-            </p>
+            <p className="text-sm text-foreground leading-relaxed">{exp.desc}</p>
           </motion.div>
         )}
       </AnimatePresence>

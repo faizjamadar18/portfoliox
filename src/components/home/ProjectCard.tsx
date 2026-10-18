@@ -1,204 +1,191 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X } from "lucide-react";
 import { SiGithub, SiYoutube } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
-import { Project, techStack } from "@/lib/data";
+import { Project } from "@/lib/data";
 import { blurReveal } from "@/lib/animations";
-import type { Tech } from "@/lib/data";
 
-let openProjectFn: ((p: Project) => void) | null = null;
-
-export function ProjectCard({ project }: { project: Project; index?: number }) {
-  const [isActive, setIsActive] = useState(false);
+export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Register this card so the shared opener can target it
-    const prev = openProjectFn;
-    openProjectFn = (p) => {
-      if (p.id === project.id) setIsActive(true);
-      else prev?.(p);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
     };
-    return () => {
-      openProjectFn = prev;
-    };
-  }, [project.id]);
 
-  // Lock scroll & listen for Escape when expanded
-  useEffect(() => {
-    if (!isActive) return;
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsActive(false);
-    };
-    window.addEventListener("keydown", onKey);
+    if (isOpen) {
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      window.dispatchEvent(new Event("scroll-lock"));
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+      }
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      window.dispatchEvent(new Event("scroll-unlock"));
+    }
+
     return () => {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
-      window.removeEventListener("keydown", onKey);
+      window.dispatchEvent(new Event("scroll-unlock"));
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isActive]);
-
-  const springTransition = { type: "spring" as const, stiffness: 200, damping: 28 };
+  }, [isOpen]);
 
   return (
     <>
-      {/* Collapsed card — wrapper reserves space so siblings don't shift when expanded */}
-      <div className="relative" style={{ minHeight: 104 }}>
-      <motion.button
-        type="button"
-        variants={blurReveal}
-        layoutId={`project-card-${project.id}`}
-        onClick={() => setIsActive(true)}
-        style={{ borderRadius: 12 }}
-        className="flex w-full items-center gap-4 text-left hover:bg-accent/40 transition-colors"
-      >
-        <motion.img
-          layoutId={`project-image-${project.id}`}
-          src={project.img}
-          alt={project.name}
-          loading="lazy"
-          style={{ borderRadius: 8 }}
-          className="h-20 w-32 shrink-0 object-contain"
-        />
-        <motion.div className="min-w-0" layoutId={`project-text-${project.id}`}>
-          <h3 className="text-base font-semibold text-foreground">
-            {project.name}
-          </h3>
-          <motion.p layoutId={`project-desc-${project.id}`} className="mt-1 text-sm text-muted-foreground line-clamp-2">
-            {project.desc}
-          </motion.p>
-        </motion.div>
-      </motion.button>
-      </div>
+      <motion.div variants={blurReveal} className="w-full">
+        <div
+          onClick={() => setIsOpen(true)}
+          className="group flex flex-row items-center justify-between gap-3 lg:gap-4 w-full cursor-pointer transition-colors duration-300"
+        >
+          <div className="h-14 w-auto lg:h-auto lg:w-32 aspect-video shrink-0 relative overflow-hidden rounded-sm border border-foreground/10 bg-neutral-100 dark:bg-neutral-900">
+            <img
+              src={project.img}
+              alt={project.name}
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          <div className="flex flex-col lg:gap-1 w-full min-w-0">
+            <h4 className="text-base leading-snug lg:leading-normal font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+              {project.name}
+            </h4>
+            <p className="text-sm text-muted-foreground line-clamp-2 lg:leading-snug">
+              {project.desc}
+            </p>
+          </div>
+        </div>
+      </motion.div>
 
-      {/* Expanded overlay */}
+      {/* Expanded modal overlay */}
       <AnimatePresence>
-        {isActive && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        {isOpen && (
+          <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setIsActive(false)}
-              className="absolute inset-0 bg-black/70 backdrop-blur-md"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
             />
 
-            {/* Expanded card — shares layoutId with the collapsed card */}
+            {/* Modal Dialog */}
             <motion.div
-              layoutId={`project-card-${project.id}`}
-              style={{ borderRadius: 16 }}
-              className="relative z-10 w-full max-w-md overflow-hidden border border-border bg-card shadow-2xl"
-              transition={springTransition}
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-11/12 md:max-w-md h-fit max-h-[90%] flex flex-col bg-background rounded-xl overflow-hidden ring-1 ring-white/10 ring-inset shadow-2xl z-101"
             >
-              {/* Image morphs from small thumbnail to full-width hero */}
-              <motion.img
-                layoutId={`project-image-${project.id}`}
-                src={project.img}
-                alt={project.name}
-                style={{ borderRadius: 0 }}
-                className="h-auto max-h-80 w-full object-contain bg-muted"
-                transition={springTransition}
-              />
-
-      
-
-              <div className="p-6">
-                {/* Name & links */}
-                <div className="flex items-start justify-between gap-4">
-                  <motion.h3
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ delay: 0.1, duration: 0.25 }}
-                    className="text-2xl font-semibold text-foreground"
+              <div className="w-full h-60 relative overflow-hidden bg-neutral-900">
+                <img
+                  src={project.img}
+                  alt={project.name}
+                  className="w-full h-full object-cover object-center"
+                />
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close dialog"
+                  className="absolute top-3 right-3 z-10 size-7 rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-black/80 flex items-center justify-center backdrop-blur-md transition cursor-pointer"
+                >
+                  <svg
+                    className="size-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    {project.name}
-                  </motion.h3>
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 6 }}
-                    transition={{ delay: 0.15, duration: 0.3 }}
-                    className="flex gap-2"
-                  >
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
-                    >
-                      <SiGithub className="size-4" />
-                    </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
-                    >
-                      <FiExternalLink className="size-4" />
-                    </a>
-                    {"video" in project && (
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="flex flex-col p-4 overflow-y-auto">
+                <div className="flex justify-between gap-2">
+                  <div className="flex flex-col w-full gap-4">
+                    <h3 className="text-2xl text-foreground font-semibold leading-none">
+                      {project.name}
+                    </h3>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-sm bg-muted dark:bg-muted/60 text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff2] squircle"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 shrink-0">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          aria-label="GitHub"
+                          className="inline-flex items-center justify-center size-8 rounded-md bg-muted dark:bg-muted/60 text-foreground hover:text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff3] hover:bg-muted squircle transition active:scale-95 cursor-pointer"
+                        >
+                          <SiGithub className="size-4" />
+                        </button>
+                      </a>
+                    )}
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <button
+                          type="button"
+                          aria-label="Live Demo"
+                          className="inline-flex items-center justify-center size-8 rounded-md bg-muted dark:bg-muted/60 text-foreground hover:text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff3] hover:bg-muted squircle transition active:scale-95 cursor-pointer"
+                        >
+                          <FiExternalLink className="size-4" />
+                        </button>
+                      </a>
+                    )}
+                    {"video" in project && project.video && (
                       <a
                         href={project.video}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-secondary text-foreground hover:bg-accent transition-colors"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <SiYoutube className="size-4" />
+                        <button
+                          type="button"
+                          aria-label="YouTube Video"
+                          className="inline-flex items-center justify-center size-8 rounded-md bg-muted dark:bg-muted/60 text-foreground hover:text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff3] hover:bg-muted squircle transition active:scale-95 cursor-pointer"
+                        >
+                          <SiYoutube className="size-4" />
+                        </button>
                       </a>
                     )}
-                  </motion.div>
+                  </div>
                 </div>
 
-                {/* Tags */}
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 6 }}
-                  transition={{ delay: 0.1, duration: 0.3 }}
-                  className="mt-4 flex flex-wrap gap-2"
-                >
-                  {project.tags.map((t) => {
-                    const match = techStack.find(
-                      (tech) =>
-                        tech.name.toLowerCase() === t.toLowerCase() ||
-                        t.toLowerCase().startsWith(tech.name.toLowerCase()) ||
-                        tech.name.toLowerCase().startsWith(t.toLowerCase()),
-                    );
-                    return (
-                      <span
-                        key={t}
-                        className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-neutral-900 px-2.5 py-1.5 text-[13px] font-medium text-foreground"
-                      >
-                        {match?.Icon ? (
-                          <match.Icon className="size-4" style={{ color: match.color }} />
-                        ) : (
-                          <span
-                            className="inline-flex size-4 items-center justify-center rounded-sm text-[10px] font-bold text-black"
-                            style={{ background: match?.letterBg ?? "#6B7280" }}
-                          >
-                            {match?.letter ?? t.charAt(0)}
-                          </span>
-                        )}
-                        {t}
-                      </span>
-                    );
-                  })}
-                </motion.div>
-
-                {/* Description — slides in below the image */}
-                <motion.p
-                  layoutId={`project-desc-${project.id}`}
-                  className="mt-5 text-sm leading-relaxed text-muted-foreground"
-                  transition={springTransition}
-                >
-                  {project.longDesc}
-                </motion.p>
+                <div className="text-muted-foreground text-sm mt-4 leading-relaxed">
+                  {project.longDesc || project.desc}
+                </div>
               </div>
             </motion.div>
           </div>

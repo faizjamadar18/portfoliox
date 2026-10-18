@@ -1,12 +1,44 @@
 import { FileText, Mail } from "lucide-react";
 import {
-  SiNextdotjs, SiTypescript, SiTailwindcss, SiFramer, SiGreensock,
-  SiReactquery, SiNodedotjs, SiPython, SiFastapi, SiFlask,
-  SiPostgresql, SiMongodb, SiSupabase, SiPrisma, SiOpenai,
-  SiGooglegemini, SiDocker, SiVercel, SiCloudflare, SiGooglecloud,
-  SiStripe, SiGithub, SiX, SiYoutube,
-  SiReact, SiSocketdotio, SiScikitlearn, SiStreamlit, SiClerk, SiLangchain, SiJsonwebtokens, SiWebrtc,
-  SiCplusplus, SiJavascript, SiMysql, SiExpress, SiPytorch, SiNumpy, SiPandas,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiFramer,
+  SiGreensock,
+  SiReactquery,
+  SiNodedotjs,
+  SiPython,
+  SiFastapi,
+  SiFlask,
+  SiPostgresql,
+  SiMongodb,
+  SiSupabase,
+  SiPrisma,
+  SiOpenai,
+  SiGooglegemini,
+  SiDocker,
+  SiVercel,
+  SiCloudflare,
+  SiGooglecloud,
+  SiStripe,
+  SiGithub,
+  SiX,
+  SiYoutube,
+  SiReact,
+  SiSocketdotio,
+  SiScikitlearn,
+  SiStreamlit,
+  SiClerk,
+  SiLangchain,
+  SiJsonwebtokens,
+  SiWebrtc,
+  SiCplusplus,
+  SiJavascript,
+  SiMysql,
+  SiExpress,
+  SiPytorch,
+  SiNumpy,
+  SiPandas,
 } from "react-icons/si";
 import { FaAws, FaLinkedin } from "react-icons/fa";
 import type { IconType } from "react-icons";
@@ -19,16 +51,23 @@ import attendx from "@/assets/Attendx.png";
 import quello from "@/assets/Quello.png";
 import modelsuite from "@/assets/modelsuite.png";
 
-export type ExperienceItemType = { role: string; company: string; dates: string; desc?: string; letter?: string; logo?: string };
+export type ExperienceItemType = {
+  role: string;
+  company: string;
+  dates: string;
+  desc?: string;
+  letter?: string;
+  logo?: string;
+};
 
 export const experience: ExperienceItemType[] = [
-  { 
-    role: "Software Developer Intern", 
-    company: "ModelSuite.ai", 
-    dates: "May 2026 - Aug 2026", 
+  {
+    role: "Software Developer Intern",
+    company: "ModelSuite.ai",
+    dates: "May 2026 - Aug 2026",
     logo: modelsuite,
-    desc: "Contributed to a modular HCM and resource planning platform, building production-ready interfaces and optimizing APIs, caching, and AI-powered workflows to improve system performance and automation."
-  }
+    desc: "Contributed to a modular HCM and resource planning platform, building production-ready interfaces and optimizing APIs, caching, and AI-powered workflows to improve system performance and automation.",
+  },
 ];
 
 export const projects = [
@@ -106,7 +145,13 @@ export const projects = [
 
 export type Project = (typeof projects)[number];
 
-export type Tech = { name: string; Icon?: IconType; color?: string; letter?: string; letterBg?: string };
+export type Tech = {
+  name: string;
+  Icon?: IconType;
+  color?: string;
+  letter?: string;
+  letterBg?: string;
+};
 
 export const techStack: Tech[] = [
   { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
@@ -139,18 +184,30 @@ export const techStack: Tech[] = [
   { name: "Scikit-learn", Icon: SiScikitlearn, color: "#F7931E" },
   { name: "Socket.IO", Icon: SiSocketdotio, color: "#ffffff" },
   { name: "WebRTC", Icon: SiWebrtc, color: "#333333" },
-
 ];
 
 export const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
-  { label: "Resume", href: "https://drive.google.com/file/d/1uuMm5FXXjjXnBtj7xf0A1Xj7bFcL9doq/view", Icon: FileText as unknown as IconType },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/faiz-jamadar-2859732a4", Icon: FaLinkedin },
+  {
+    label: "Resume",
+    href: "https://drive.google.com/file/d/1uuMm5FXXjjXnBtj7xf0A1Xj7bFcL9doq/view",
+    Icon: FileText as unknown as IconType,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/faiz-jamadar-2859732a4",
+    Icon: FaLinkedin,
+  },
   { label: "Email", href: "mailto:faizjamadar18@gmail.com", Icon: Mail as unknown as IconType },
   { label: "Twitter", href: "https://x.com/faizjamadar18", Icon: SiX },
 ];
 
-export const roles = ["Product Engineer", "Full Stack Developer", "UI Engineer", "Open Source Builder"];
+export const roles = [
+  "Product Engineer",
+  "Full Stack Developer",
+  "UI Engineer",
+  "Open Source Builder",
+];
 
 export const songs = [
   {
