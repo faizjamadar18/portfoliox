@@ -166,7 +166,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
                         return (
                           <span
                             key={tag}
-                            className="inline-flex flex-grow min-w-0 items-center justify-center gap-1 text-xs px-2 py-1 rounded-sm bg-muted dark:bg-muted/60 text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff2] squircle"
+                            className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-sm bg-muted dark:bg-muted/60 text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff2] squircle"
                           >
                             {tech?.src ? (
                               <img
