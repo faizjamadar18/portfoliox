@@ -42,7 +42,12 @@ function ExperienceItem({ exp }: { exp: (typeof experience)[number] }) {
               className="size-5 rounded-sm border border-foreground/10 squircle relative overflow-hidden shrink-0 bg-neutral-900 flex items-center justify-center"
             >
               {exp.logo ? (
-                <img src={exp.logo} alt={exp.company} className="size-full object-cover" />
+                <img
+                  src={exp.logo}
+                  alt={exp.company}
+                  draggable={false}
+                  className="size-full object-contain p-0.5 saturate-[.75] brightness-[.95]"
+                />
               ) : exp.letter ? (
                 <span className="text-[10px] font-bold text-foreground">{exp.letter}</span>
               ) : null}

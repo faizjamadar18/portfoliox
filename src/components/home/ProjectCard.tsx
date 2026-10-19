@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SiGithub, SiYoutube } from "react-icons/si";
 import { FiExternalLink } from "react-icons/fi";
-import { Project } from "@/lib/data";
+import { Project, getTagVisual, iconColorForDark } from "@/lib/data";
 import { blurReveal } from "@/lib/animations";
+
+/** Spring shared by the card → modal morph (same physics as the original design). */
+const springTransition = { type: "spring" as const, stiffness: 200, damping: 28 };
 
 export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,30 +41,45 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
 
   return (
     <>
-      <motion.div variants={blurReveal} className="w-full">
-        <div
-          onClick={() => setIsOpen(true)}
-          className="group flex flex-row items-center justify-between gap-3 lg:gap-4 w-full cursor-pointer transition-colors duration-300"
+      {/* Collapsed card — the card, thumbnail and description carry shared
+          layoutIds with the dialog below, so clicking one makes the dialog
+          grow smoothly out of this card instead of fading in from nowhere. */}
+      <motion.div
+        variants={blurReveal}
+        layoutId={`project-card-${project.id}`}
+        transition={springTransition}
+        style={{ borderRadius: 12 }}
+        onClick={() => setIsOpen(true)}
+        className="group flex flex-row items-center justify-between gap-3 lg:gap-4 w-full cursor-pointer transition-colors"
+      >
+        <motion.div
+          layoutId={`project-image-${project.id}`}
+          transition={springTransition}
+          className="h-14 w-auto lg:h-auto lg:w-32 aspect-video shrink-0 relative overflow-hidden rounded-sm border border-foreground/10 bg-neutral-100 dark:bg-neutral-900"
         >
-          <div className="h-14 w-auto lg:h-auto lg:w-32 aspect-video shrink-0 relative overflow-hidden rounded-sm border border-foreground/10 bg-neutral-100 dark:bg-neutral-900">
-            <img
-              src={project.img}
-              alt={project.name}
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-          <div className="flex flex-col lg:gap-1 w-full min-w-0">
-            <h4 className="text-base leading-snug lg:leading-normal font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-              {project.name}
-            </h4>
-            <p className="text-sm text-muted-foreground line-clamp-2 lg:leading-snug">
-              {project.desc}
-            </p>
-          </div>
+          <img
+            src={project.img}
+            alt={project.name}
+            loading="lazy"
+            draggable={false}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        </motion.div>
+        <div className="flex flex-col lg:gap-1 w-full min-w-0">
+          <h4 className="text-base leading-snug lg:leading-normal font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+            {project.name}
+          </h4>
+          <motion.p
+            layoutId={`project-desc-${project.id}`}
+            transition={springTransition}
+            className="text-sm text-muted-foreground line-clamp-2 lg:leading-snug"
+          >
+            {project.desc}
+          </motion.p>
         </div>
       </motion.div>
 
-      {/* Expanded modal overlay */}
+      {/* Expanded modal — morphs out of the card, then its pieces settle in one by one. */}
       <AnimatePresence>
         {isOpen && (
           <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
@@ -75,27 +93,36 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Modal Dialog */}
+            {/* Dialog — same layoutIds as the collapsed card above */}
             <motion.div
               ref={modalRef}
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              layoutId={`project-card-${project.id}`}
+              transition={springTransition}
+              style={{ borderRadius: 12 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-11/12 md:max-w-md h-fit max-h-[90%] flex flex-col bg-background rounded-xl overflow-hidden ring-1 ring-white/10 ring-inset shadow-2xl z-101"
+              className="relative w-full max-w-11/12 md:max-w-md h-fit max-h-[90%] flex flex-col bg-background overflow-hidden ring-1 ring-white/10 ring-inset shadow-2xl z-101"
             >
-              <div className="w-full h-60 relative overflow-hidden bg-neutral-900">
+              {/* Hero image morphs from the small thumbnail to full-width */}
+              <motion.div
+                layoutId={`project-image-${project.id}`}
+                transition={springTransition}
+                className="w-full h-60 shrink-0 relative overflow-hidden bg-neutral-900"
+              >
                 <img
                   src={project.img}
                   alt={project.name}
+                  draggable={false}
                   className="w-full h-full object-cover object-center"
                 />
                 {/* Close Button */}
-                <button
+                <motion.button
                   type="button"
                   onClick={() => setIsOpen(false)}
                   aria-label="Close dialog"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ delay: 0.3, duration: 0.2 }}
                   className="absolute top-3 right-3 z-10 size-7 rounded-full bg-black/60 text-white/80 hover:text-white hover:bg-black/80 flex items-center justify-center backdrop-blur-md transition cursor-pointer"
                 >
                   <svg
@@ -110,28 +137,68 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
 
               <div className="flex flex-col p-4 overflow-y-auto">
                 <div className="flex justify-between gap-2">
                   <div className="flex flex-col w-full gap-4">
-                    <h3 className="text-2xl text-foreground font-semibold leading-none">
+                    {/* Piece 1 — title slides in */}
+                    <motion.h3
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ delay: 0.1, duration: 0.25 }}
+                      className="text-2xl text-foreground font-semibold leading-none"
+                    >
                       {project.name}
-                    </h3>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="inline-flex items-center gap-1 text-xs px-2 py-1 rounded-sm bg-muted dark:bg-muted/60 text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff2] squircle"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    </motion.h3>
+                    {/* Piece 2 — tags follow */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ delay: 0.15, duration: 0.3 }}
+                      className="flex items-center gap-2 flex-wrap"
+                    >
+                      {project.tags.map((tag) => {
+                        const tech = getTagVisual(tag);
+                        return (
+                          <span
+                            key={tag}
+                            className="inline-flex flex-grow min-w-0 items-center justify-center gap-1 text-xs px-2 py-1 rounded-sm bg-muted dark:bg-muted/60 text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff2] squircle"
+                          >
+                            {tech?.src ? (
+                              <img
+                                src={tech.src}
+                                alt=""
+                                aria-hidden="true"
+                                draggable={false}
+                                className="size-3.5 shrink-0 object-contain"
+                              />
+                            ) : tech?.Icon ? (
+                              <tech.Icon
+                                className="size-3.5 shrink-0 object-contain"
+                                style={
+                                  tech.color ? { color: iconColorForDark(tech.color) } : undefined
+                                }
+                              />
+                            ) : null}
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </motion.div>
                   </div>
 
-                  <div className="flex items-start gap-2 shrink-0">
+                  {/* Piece 3 — action buttons last */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                    className="flex items-start gap-2 shrink-0"
+                  >
                     {project.github && (
                       <a
                         href={project.github}
@@ -180,12 +247,17 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
                         </button>
                       </a>
                     )}
-                  </div>
+                  </motion.div>
                 </div>
 
-                <div className="text-muted-foreground text-sm mt-4 leading-relaxed">
+                {/* Description rides the same shared layout as the card's line-clamped copy */}
+                <motion.p
+                  layoutId={`project-desc-${project.id}`}
+                  transition={springTransition}
+                  className="text-muted-foreground text-sm mt-4 leading-relaxed"
+                >
                   {project.longDesc || project.desc}
-                </div>
+                </motion.p>
               </div>
             </motion.div>
           </div>

@@ -45,11 +45,15 @@ import type { IconType } from "react-icons";
 
 import xpense from "@/assets/Xpense.png";
 import faizbook from "@/assets/faizbook.png";
-import docschat from "@/assets/docschat.png";
 import connectify from "@/assets/connectify.png";
 import attendx from "@/assets/Attendx.png";
 import quello from "@/assets/Quello.png";
 import modelsuite from "@/assets/modelsuite.png";
+
+import qdrantIcon from "@/assets/icons/qdrant.svg";
+import convexIcon from "@/assets/icons/convex.svg";
+import chromadbIcon from "@/assets/icons/chromadb.png";
+import imagekitIcon from "@/assets/icons/imagekit.png";
 
 export type ExperienceItemType = {
   role: string;
@@ -74,13 +78,13 @@ export const projects = [
   {
     id: "quello",
     name: "Quello",
-    desc: "Bring what you already use into one workspace, for teams and for individuals. Ask in plain language, and every answer links to its evidence, one click away.",
+    desc: "Bring every tool you use into one workspace. Ask in plain language, and every answer links to its source.",
     img: quello,
     longDesc:
-      "Bring what you already use into one workspace, for teams and for individuals. Ask in plain language, and every answer links to its evidence, one click away.",
+      "Bring every tool you use into one workspace. Ask in plain language, and every answer links to its source.",
     tags: ["Next.js", "TypeScript", "FastAPI", "Python", "MongoDB", "Qdrant", "Cloudflare R2"],
     github: "https://github.com/faizjamadar18/Quello",
-    live: "https://github.com/faizjamadar18",
+    live: "https://quello.dev",
   },
   {
     id: "attendx",
@@ -92,17 +96,6 @@ export const projects = [
     tags: ["Python", "Scikit-learn", "Supabase"],
     github: "https://github.com/faizjamadar18/AttendX",
     live: "https://attendx-landing.vercel.app",
-  },
-  {
-    id: "docschat",
-    name: "DocsChat",
-    desc: "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
-    img: docschat,
-    longDesc:
-      "A RAG-powered document assistant that transforms PDFs into accurate and interactive AI conversations.",
-    tags: ["Next.js", "FastAPI", "RAG", "LangChain", "ChromaDB", "Gemini"],
-    github: "https://github.com/faizjamadar18/DocsChat",
-    live: "https://docschats.vercel.app",
   },
   {
     id: "xpense",
@@ -148,6 +141,8 @@ export type Project = (typeof projects)[number];
 export type Tech = {
   name: string;
   Icon?: IconType;
+  /** Asset URL for official marks that aren't in react-icons (imported from src/assets/icons). */
+  src?: string;
   color?: string;
   letter?: string;
   letterBg?: string;
@@ -186,11 +181,55 @@ export const techStack: Tech[] = [
   { name: "WebRTC", Icon: SiWebrtc, color: "#333333" },
 ];
 
+/**
+ * Official marks for project tags that have no entry in techStack.
+ * Every color is the brand's official one (fetched from Simple Icons metadata
+ * or the brand site): Qdrant #DC244C, Cloudflare #F38020, Convex #EE342F,
+ * ImageKit brand blue.
+ */
+const tagIcons: Record<string, Tech> = {
+  qdrant: { name: "Qdrant", src: qdrantIcon, color: "#DC244C" },
+  "cloudflare r2": { name: "Cloudflare R2", Icon: SiCloudflare, color: "#F38020" },
+  chromadb: { name: "ChromaDB", src: chromadbIcon },
+  convex: { name: "Convex", src: convexIcon, color: "#EE342F" },
+  "imagekit.io": { name: "ImageKit.io", src: imagekitIcon, color: "#0450D5" },
+  jwt: { name: "JWT", Icon: SiJsonwebtokens, color: "#000000" },
+};
+
+/** Match a project tag to its tech entry: override map first, then techStack (exact/prefix). */
+export function getTagVisual(tag: string): Tech | null {
+  const override = tagIcons[tag.toLowerCase()];
+  if (override) return override;
+  const t = tag.toLowerCase();
+  const match = techStack.find((x) => {
+    const n = x.name.toLowerCase();
+    return n === t || t.startsWith(n) || n.startsWith(t);
+  });
+  // Letter-only entries (SQL, RAG) have no official logo — no icon is rendered.
+  if (!match || (!match.Icon && !match.src)) return null;
+  return match;
+}
+
+/**
+ * Darken-proof a brand color for the dark theme: colors dark enough to vanish
+ * on the near-black chips (JWT black, LangChain near-black) render in a light
+ * neutral instead — the same geometry, still "official".
+ */
+export function iconColorForDark(color: string): string {
+  const hex = color.replace("#", "");
+  if (hex.length !== 6) return color;
+  const r = parseInt(hex.slice(0, 2), 16) / 255;
+  const g = parseInt(hex.slice(2, 4), 16) / 255;
+  const b = parseInt(hex.slice(4, 6), 16) / 255;
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance < 0.22 ? "#ECECEC" : color;
+}
+
 export const socials: { label: string; href: string; Icon: IconType }[] = [
   { label: "GitHub", href: "https://github.com/faizjamadar18", Icon: SiGithub },
   {
     label: "Resume",
-    href: "https://drive.google.com/file/d/1uuMm5FXXjjXnBtj7xf0A1Xj7bFcL9doq/view",
+    href: "",
     Icon: FileText as unknown as IconType,
   },
   {
