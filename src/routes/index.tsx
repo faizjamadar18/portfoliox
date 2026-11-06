@@ -108,10 +108,7 @@ function Index() {
                     <SiGithub className="size-3.5" /> GitHub
                   </button>
                 </a>
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a target="_blank" rel="noreferrer">
                   <button
                     type="button"
                     className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95 transition ease-out cursor-pointer select-none bg-muted dark:bg-muted/60 text-foreground hover:text-foreground shadow-[inset_0_0_0_1px_#ffffff14,inset_0_1px_#fff3] hover:bg-muted squircle h-7 rounded-sm gap-1.5 px-2.5"

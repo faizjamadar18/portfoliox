@@ -1,4 +1,4 @@
-import { FileText, Mail } from "lucide-react";
+import { FileText, Mail, Terminal } from "lucide-react";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -39,6 +39,7 @@ import {
   SiPytorch,
   SiNumpy,
   SiPandas,
+  SiNpm,
 } from "react-icons/si";
 import { FaAws, FaLinkedin } from "react-icons/fa";
 import type { IconType } from "react-icons";
@@ -49,6 +50,7 @@ import connectify from "@/assets/connectify.png";
 import attendx from "@/assets/Attendx.png";
 import quello from "@/assets/Quello.png";
 import modelsuite from "@/assets/modelsuite.png";
+import waitfeed from "@/assets/waitfeed.png";
 
 import qdrantIcon from "@/assets/icons/qdrant.svg";
 import convexIcon from "@/assets/icons/convex.svg";
@@ -75,6 +77,17 @@ export const experience: ExperienceItemType[] = [
 ];
 
 export const projects = [
+  {
+    id: "waitfeed",
+    name: "WaitFeed",
+    desc: "Turn your coding-agent wait time into a real-time tech feed right inside your terminal Interfaces",
+    img: waitfeed,
+    longDesc:
+      "urn your coding-agent wait time into a real-time tech feed right inside your terminal Interfaces",
+    tags: ["TypeScript", "Node.js", "CLI", "npm"],
+    github: "https://github.com/faizjamadar18/waitfeed",
+    live: "https://waitfeed.vercel.app",
+  },
   {
     id: "quello",
     name: "Quello",
@@ -194,6 +207,8 @@ const tagIcons: Record<string, Tech> = {
   convex: { name: "Convex", src: convexIcon, color: "#EE342F" },
   "imagekit.io": { name: "ImageKit.io", src: imagekitIcon, color: "#0450D5" },
   jwt: { name: "JWT", Icon: SiJsonwebtokens, color: "#000000" },
+  cli: { name: "CLI", Icon: Terminal as unknown as IconType, color: "#ffffff" },
+  npm: { name: "npm", Icon: SiNpm, color: "#CB3837" },
 };
 
 /** Match a project tag to its tech entry: override map first, then techStack (exact/prefix). */
